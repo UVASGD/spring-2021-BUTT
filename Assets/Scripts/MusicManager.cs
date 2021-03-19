@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    AudioSource music;
-    float length = 5.538F;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        music = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
     }
-    float timer= -1;
-    bool timing= false;
-    void Pause()
+    public GameObject[] beatReceivers;
+    [Header("Control When Beats Happen (Seconds)")]
+    public float initialDelay = 0F;  // How long before the music starts 
+    public float betweenBeatDelay = .461538462F; // How long in between beats
+    
+    AudioSource source;
+
+    float beats = 0;
+    private void Update()
     {
-        timing = true;
-        music.volume = .3F;
-        timer = Time.time;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (timing && Time.time - timer > length)
+        float curSongTime = source.time;
+
+        if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
         {
-            timing = false;
-            music.volume = 1;
+            foreach (GameObject receiver in beatReceivers)
+            {
+                receiver.SendMessage("OnBeat", beats);
+            }
+            beats++;
+
         }
     }
 }
