@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
     public float forceAmount = 3;
     public GameObject player;
