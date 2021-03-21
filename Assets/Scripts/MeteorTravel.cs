@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteorTravel : MonoBehaviour
 {
-    private float timer;
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
