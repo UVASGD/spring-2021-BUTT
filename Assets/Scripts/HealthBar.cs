@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
-    private TextMesh health_display;
+    private Image healthbar;
     public GameObject player;
-    // public PlayerHealth player_health;
+    private int maxHealth;
     // Start is called before the first frame update
     void Start() {
-        health_display = GetComponent<TextMesh>();
-        health_display.text = ""+player.GetComponent<PlayerHealth>().health;
-        // health_display.text = player_health.health;
-        // health_display.text = "hi";
+        healthbar = GetComponent<Image>();
+        maxHealth = player.GetComponent<PlayerHealth>().maxHealth;
     }
 
     // Update is called once per frame
     void Update() {
-        health_display.text = ""+player.GetComponent<PlayerHealth>().health;
+        float health = player.GetComponent<PlayerHealth>().health;
+        healthbar.fillAmount = health / maxHealth;
     }
 }
