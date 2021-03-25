@@ -14,13 +14,14 @@ public class Movement : MonoBehaviour
     }
     void OnBeat(int beat)
     {
-        if (beat % 2 == 1)
+        //Onbeat method example:
+        /*if (beat % 2 == 1)
         {
             GetComponent<SpriteRenderer>().color = Color.red;
         } else
         {
             GetComponent<SpriteRenderer>().color = Color.blue;
-        }
+        }*/
 
     }
 

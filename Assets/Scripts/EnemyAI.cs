@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -26,25 +27,24 @@ public class EnemyAI : MonoBehaviour
         Transform enemyTransform = this.gameObject.GetComponent<Transform>();
         Transform playerTransform = player.GetComponent<Transform>();
         // operator override means we can just subtract directly
-         Vector3 vecToPlayer = playerTransform.position - enemyTransform.position;
-         // don't care about Z difference
+        Vector3 vecToPlayer = playerTransform.position - enemyTransform.position;
+        // don't care about Z difference
         forceToApply = new Vector2(vecToPlayer.x, vecToPlayer.y);
-         forceToApply.Normalize();
-         forceToApply = forceToApply* forceAmount;
+        forceToApply.Normalize();
+        forceToApply = forceToApply* forceAmount;
 
         if (beatNum % 2 == 1)
         {
 
             rb.AddForce(forceToApply, ForceMode2D.Impulse);
-            rb.drag = 50;
 
         
         }
        
         
-       //forceToApply.Normalize();
-        //forceToApply = forceToApply * 3;
+       forceToApply.Normalize();
+       forceToApply = forceToApply * forceAmount;
 
-        //rb.AddForce(forceToApply);
+       rb.AddForce(forceToApply);
     }
 }
