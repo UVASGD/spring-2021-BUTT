@@ -46,5 +46,6 @@ public class EnemyAI : MonoBehaviour
        forceToApply = forceToApply * forceAmount;
 
        rb.AddForce(forceToApply);
+
     }
 }

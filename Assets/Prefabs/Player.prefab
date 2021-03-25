@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6443348360421146193}
   - component: {fileID: 6443348360421146198}
   - component: {fileID: 6443348360421146199}
+  - component: {fileID: 2078303053369835432}
   - component: {fileID: 6443348360421146221}
   m_Layer: 0
   m_Name: Player
@@ -156,6 +157,20 @@ MonoBehaviour:
   laserDamage: 1
   laserDuration: 0.1
   bullet: {fileID: 3128568155943613033, guid: 083ef1543d959d54a8f6ef93922ff9d8, type: 3}
+--- !u!114 &2078303053369835432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443348360421146196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7efc0d771d93442bdc0f92fc5e6649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
 --- !u!120 &6443348360421146221
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class MeteorManager : MonoBehaviour
 
     void OnBeat(int beatNum)
     {
+        // Moves each meteor on beat
         foreach(GameObject m in meteors)
         {
             m.SendMessage("incrementBeat");
@@ -26,6 +27,7 @@ public class MeteorManager : MonoBehaviour
         
     } 
 
+    // Removes specified meteor
     void Remove(GameObject toRemove)
     {
         meteors.Remove(toRemove);
