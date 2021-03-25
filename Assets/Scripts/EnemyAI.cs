@@ -43,8 +43,7 @@ public class EnemyAI : MonoBehaviour
        
         
        //forceToApply.Normalize();
-        //forceToApply = forceToApply * 3;
-
-        //rb.AddForce(forceToApply);
+       //forceToApply = forceToApply * 3;
+      // rb.AddForce(forceToApply);
     }
 }
