@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5878520736668125547}
   - component: {fileID: 5878520736668125542}
   - component: {fileID: 5878520736668125541}
+  - component: {fileID: -7018000617901470995}
+  - component: {fileID: -8329866304101649464}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,3 +120,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7018000617901470995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5878520736668125546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75cd0b6d8d90411439c9996aa9efeef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammo: 0
+  frameCounter: 0
+  cooldownCounter: 0
+  leniencyCounter: 0
+  parrying: 0
+--- !u!114 &-8329866304101649464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5878520736668125546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c587d1e95e4925441a7b5865ac6fcc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 50
+  bullet: {fileID: 3128568155943613033, guid: 083ef1543d959d54a8f6ef93922ff9d8, type: 3}

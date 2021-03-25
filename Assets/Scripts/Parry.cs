@@ -4,71 +4,91 @@ using UnityEngine;
 
 public class Parry : MonoBehaviour
 {
-    public const int Leniency = 30;
-    public const int Cooldown = 120;
+
+
+
+    public int maxHealth = 10;
+    public float parryLeniencySeconds = .025F;
+    
+    public float cooldownLengthSeconds = 1;
+
+    [Header("Debug Info")]
+    float cooldownTimer = 0;
+    float leniencyTimer = -1;
+    float parryTimer = 0;
     public int ammo;
-    public int frameCounter;
-    public int cooldownCounter;
-    public int leniencyCounter;
+    
     public bool parrying;
     private SpriteRenderer sprite;
+    int health;
+    int lastDamage;
     // Start is called before the first frame update
     void Start()
     {
-        ammo = 0;
-        frameCounter = 0;
-        parrying = false;
+        health = maxHealth;
         sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && cooldownCounter==0)
+        if (parryTimer > 0)
         {
-            if (leniencyCounter > 0)
+            parryTimer -= Time.deltaTime; //gross and bad, should be using Time.time, but makes the code more similar to what it was before
+        }
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+        if (leniencyTimer > 0)
+        {
+            leniencyTimer -= Time.deltaTime;
+        }
+        if (Input.GetMouseButtonDown(1) && cooldownTimer==0)
+        {
+            if (leniencyTimer > 0) //got hit before parrying
             {
-                leniencyCounter = 0;
+                leniencyTimer = -1;
                 ammo++;
             }
             else
             {
                 sprite.color = new Color(0, 1, 1, 1);
                 parrying = true;
-                frameCounter = Leniency + 1;
-                cooldownCounter = Cooldown + 1;
+                parryTimer = parryLeniencySeconds;
             }
         }
-        if (frameCounter > 0)
+        if (parryTimer == 0 && parrying)
         {
-            frameCounter--;
-            if (frameCounter == 0 && parrying)
-            {
-                sprite.color = new Color(1, 1, 1, 1);
-                parrying = false;
-            }
+            sprite.color = new Color(1, 1, 1, 1);
+            cooldownTimer = cooldownLengthSeconds;
+            parrying = false;
         }
-        if (cooldownCounter > 0)
-            cooldownCounter--;
-        if (leniencyCounter > 0)
+
+        if (leniencyTimer == 0)
         {
-            leniencyCounter--;
-            if (leniencyCounter == 0)
-            {
-                //get hurt
-            }
+            leniencyTimer = -1;
+            //take damage
         }
+        
     }
-    void ProjectileHit()
+    void OnTriggerEnter2D(Collider2D collision)
     {
+
+    }
+    void Damage(int damage)
+    {
+
         if (parrying)
         {
             parrying = false;
-            frameCounter = 0;
+            cooldownTimer = cooldownLengthSeconds;
             sprite.color = new Color(1, 1, 1, 1);
             ammo++;
         }
         else
-            leniencyCounter = Leniency;
+        {
+            leniencyTimer = parryLeniencySeconds;
+        }
     }
 }

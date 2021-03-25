@@ -12,6 +12,17 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    void OnBeat(int beat)
+    {
+        if (beat % 2 == 1)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+        } else
+        {
+            GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+
+    }
 
     // Update is called once per frame
     void Update()
