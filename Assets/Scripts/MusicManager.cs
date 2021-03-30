@@ -30,4 +30,12 @@ public class MusicManager : MonoBehaviour
 
         }
     }
+    /**
+     * Gives a number indicating how far we are from a beat. If we are closer to the last beat than the next one, returns the time since the last beat. Otherwise returns -1 * the time to the next beat
+     */
+    public float TimeToNextBeat()
+    {
+        float timeSinceLastBeat = source.time - initialDelay - (beats - 1) * betweenBeatDelay;
+        return timeSinceLastBeat < betweenBeatDelay / 2F ? timeSinceLastBeat : timeSinceLastBeat - betweenBeatDelay; //return the distance to the last beat or the next beat, whichever is closest
+    }
 } 

@@ -58,29 +58,31 @@ public class Parry : MonoBehaviour
                 parryTimer = parryLeniencySeconds;
             }
         }
-        if (parryTimer == 0 && parrying)
+        if (parryTimer <= 0 && parrying)
         {
             sprite.color = new Color(1, 1, 1, 1);
             cooldownTimer = cooldownLengthSeconds;
             parrying = false;
         }
 
-        if (leniencyTimer == 0)
+        if (leniencyTimer <= 0 && leniencyTimer != -1)
         {
             leniencyTimer = -1;
-            //take damage
+            GetComponent<PlayerHealth>().Damage(lastDamage);//removes player health
         }
         
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-
+        //need to change if adding walls
+        Damage(1);
     }
     void Damage(int damage)
     {
 
         if (parrying)
         {
+            print("parry successful");
             parrying = false;
             cooldownTimer = cooldownLengthSeconds;
             sprite.color = new Color(1, 1, 1, 1);
@@ -88,6 +90,8 @@ public class Parry : MonoBehaviour
         }
         else
         {
+            lastDamage = damage;
+            print("setting leniency");
             leniencyTimer = parryLeniencySeconds;
         }
     }
