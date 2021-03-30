@@ -27,7 +27,7 @@ public class Meteor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
+        transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
         // Changes state of meteor on beat
 
         if (beatCount == startBeat)

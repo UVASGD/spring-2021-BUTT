@@ -20,20 +20,21 @@ public class MeteorManager : MonoBehaviour
 
     void SpawnMeteor()
     {
-        GameObject temp = meteor;
-        Instantiate(temp, new Vector3(Random.Range(-11, 11), Random.Range(-4, 4), 0), transform.rotation);
-        temp.gameObject.SendMessage("SetUp", this);
-        meteorList.Add(temp);
+        GameObject newMeteor = (GameObject)Instantiate(meteor, new Vector3(Random.Range(-11, 11), Random.Range(-0, 4), 0), transform.rotation);
+        newMeteor.SendMessage("SetUp", this.gameObject);
+        meteorList.Add(newMeteor);
     }
 
     void OnBeat(int beatNum)
     {
         // Moves each meteor on beat
-        float x = 0;
-        Invoke("SpawnMeteor", x);
+        float temp = Random.Range(0, 5);
+        if(temp < 1)
+        {
+            Invoke("SpawnMeteor", 0);
+        }
         foreach (GameObject m in meteorList)
         {
-            Debug.Log("meteor");
             m.SendMessage("incrementBeat");
         }
 
