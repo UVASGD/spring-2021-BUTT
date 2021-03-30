@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    public MusicManager musicManager;
     public float recoilForce = 10;
     public float bulletSpeed = 50;
     public float laserLength = 200;
     public int laserDamage = 1;
+    public float shootOnBeatLeniency = .06F;
     public float laserDuration = .1F;
     public Rigidbody2D bullet;
     
@@ -24,11 +26,15 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lastLaserFire != -1 && Time.time - lastLaserFire > laserDuration) {
+
+        if (lastLaserFire != -1 && Time.time - lastLaserFire > laserDuration )
+        {
             laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
         }
-        if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0)
-            FireLaser();
+        if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && Mathf.Abs(musicManager.TimeToNextBeat()) < shootOnBeatLeniency) { 
+            print("Time to beat: " + Mathf.Abs(musicManager.TimeToNextBeat()));
+        FireLaser();
+        }
     }
     void FireBullet()
     {

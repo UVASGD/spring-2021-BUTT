@@ -11,7 +11,6 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
 
     }
 
@@ -20,8 +19,12 @@ public class EnemyAI : MonoBehaviour
     {
       
     }
-
-    void OnBeat(int beatNum) { 
+    public void Setup(GameObject player)
+    {
+        rb = GetComponent<Rigidbody2D>();
+        this.player = player;
+    }
+    public void OnBeat(int beatNum) { 
         Vector2 forceToApply;
 
         Transform enemyTransform = this.gameObject.GetComponent<Transform>();
