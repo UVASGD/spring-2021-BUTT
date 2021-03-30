@@ -21,6 +21,7 @@ public class Meteor : MonoBehaviour
         initialPosition = transform.position.y;
         playerInside = null;
         pariable = false;
+        damage = 10;
     }
 
     // Update is called once per frame
@@ -51,6 +52,11 @@ public class Meteor : MonoBehaviour
     bool getPariable()
     {
         return pariable;
+    }
+
+    void SetUp(GameObject MeteorManager)
+    {
+        manager = MeteorManager;
     }
 
     // Checks if Player is inside of Meteor and saves it's object in memory

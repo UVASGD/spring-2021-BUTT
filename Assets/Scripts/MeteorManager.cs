@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MeteorManager : MonoBehaviour
 {
-    public List<GameObject> meteors;
+    public List<GameObject> meteorList;
+    public GameObject meteor;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,22 +15,33 @@ public class MeteorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
 
+    void SpawnMeteor()
+    {
+        GameObject temp = meteor;
+        Instantiate(temp, new Vector3(Random.Range(-11, 11), Random.Range(-4, 4), 0), transform.rotation);
+        temp.gameObject.SendMessage("SetUp", this);
+        meteorList.Add(temp);
     }
 
     void OnBeat(int beatNum)
     {
         // Moves each meteor on beat
-        foreach(GameObject m in meteors)
+        float x = 0;
+        Invoke("SpawnMeteor", x);
+        foreach (GameObject m in meteorList)
         {
+            Debug.Log("meteor");
             m.SendMessage("incrementBeat");
         }
-        
-    } 
+
+    }
 
     // Removes specified meteor
     void Remove(GameObject toRemove)
     {
-        meteors.Remove(toRemove);
+        meteorList.Remove(toRemove);
     }
 }
