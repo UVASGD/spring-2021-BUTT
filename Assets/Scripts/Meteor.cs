@@ -8,16 +8,16 @@ public class Meteor : MonoBehaviour
     int startBeat;
     float initialPosition;
     bool pariable;
-    Transform transform;
     GameObject playerInside;
     public int damage = 10;
     public GameObject manager;
+    public float deathLength = .25F;
+    float deathTimer = -1;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<CircleCollider2D>().enabled = false;
         startBeat = 2;
-        transform = GetComponent<Transform>();
         initialPosition = transform.position.y;
         playerInside = null;
         pariable = false;
@@ -27,9 +27,12 @@ public class Meteor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
+        //transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
         // Changes state of meteor on beat
-
+        if (deathTimer != -1 && Time.time - deathTimer > deathLength)
+        {
+            Delete();
+        } 
         if (beatCount == startBeat)
         {
             pariable = true;
@@ -38,15 +41,7 @@ public class Meteor : MonoBehaviour
         {
             GetComponent<CircleCollider2D>().enabled = true;
         }
-        if (beatCount == startBeat + 4)
-        {
-            // Checks if player is still colliding with Meteor. If so, deal damage to player.
-            if(playerInside != null)
-            {
-                playerInside.SendMessage("Damage", damage);
-            }
-            Delete();
-        }
+       
     }
 
     bool getPariable()
@@ -81,6 +76,16 @@ public class Meteor : MonoBehaviour
     void incrementBeat()
     {
         beatCount++;
+        if (beatCount == startBeat + 4 && deathTimer == -1)
+        {
+            // Checks if player is still colliding with Meteor. If so, deal damage to player.
+            if (playerInside != null)
+            {
+                playerInside.SendMessage("Damage", damage);
+            }
+            deathTimer = Time.time;
+            GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+        }
     }
 
     // Tells MeteorManager to remove current object from list

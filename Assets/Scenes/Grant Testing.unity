@@ -174,12 +174,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2901598900947436929, guid: 6b06d8462831f2d4b886a1e42dd29da2, type: 3}
+      propertyPath: meteor
+      value: 
+      objectReference: {fileID: 2028138596}
     - target: {fileID: 2901598900947436934, guid: 6b06d8462831f2d4b886a1e42dd29da2, type: 3}
       propertyPath: m_Name
       value: MeteorManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b06d8462831f2d4b886a1e42dd29da2, type: 3}
+--- !u!114 &337830119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+  m_PrefabInstance: {fileID: 6711420387662323891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cc7a5f79c7a1640b86a958ed7ce370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &396846297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6443348360421146196, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
@@ -272,6 +287,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+--- !u!1 &2028138596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4894740567018268398, guid: 8efdc0216741f214ba74a8d822930dce, type: 3}
+  m_PrefabInstance: {fileID: 2124702634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2040134484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -449,6 +469,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: musicManager
+      value: 
+      objectReference: {fileID: 337830119}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: shootThreshold
+      value: 0.06
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
 --- !u!1001 &6711420387662323891
@@ -503,8 +531,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: initialDelay
+      value: 0.23076925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.data[0]

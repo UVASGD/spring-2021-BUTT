@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
     public float forceAmount = 3;
     public GameObject player;
-
+    public float damage = 1;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -50,5 +50,12 @@ public class EnemyAI : MonoBehaviour
 
        rb.AddForce(forceToApply);
 
+    }
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Player")
+        {
+            coll.gameObject.SendMessage("Damage", damage);
+        }
     }
 }

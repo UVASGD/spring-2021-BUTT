@@ -20,11 +20,11 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Reduce player health by the given quantity.
-    public void Damage(int damage) {
+    public void LowerHealth(int damage) {
         health -= damage;
     }
 
-    public void Heal(int heal) {
+    public void RaiseHealth(int heal) {
         health += heal;
     }
 }

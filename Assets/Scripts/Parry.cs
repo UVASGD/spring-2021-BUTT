@@ -13,8 +13,8 @@ public class Parry : MonoBehaviour
     public float cooldownLengthSeconds = 1;
 
     [Header("Debug Info")]
-    float cooldownTimer = 0;
-    float leniencyTimer = -1;
+    public float cooldownTimer = 0;
+    public float leniencyTimer = -1;
     float parryTimer = 0;
     public int ammo;
     
@@ -39,12 +39,12 @@ public class Parry : MonoBehaviour
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;
-        }
+        } 
         if (leniencyTimer > 0)
         {
             leniencyTimer -= Time.deltaTime;
         }
-        if (Input.GetMouseButtonDown(1) && cooldownTimer==0)
+        if (Input.GetMouseButtonDown(1) && cooldownTimer <=0)
         {
             if (leniencyTimer > 0) //got hit before parrying
             {
@@ -68,14 +68,13 @@ public class Parry : MonoBehaviour
         if (leniencyTimer <= 0 && leniencyTimer != -1)
         {
             leniencyTimer = -1;
-            GetComponent<PlayerHealth>().Damage(lastDamage);//removes player health
+            GetComponent<PlayerHealth>().LowerHealth(lastDamage);//removes player health
         }
         
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //need to change if adding walls
-        Damage(1);
+        
     }
     void Damage(int damage)
     {
