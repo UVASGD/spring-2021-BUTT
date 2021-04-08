@@ -11,8 +11,7 @@ public class Meteor : MonoBehaviour
     GameObject playerInside;
     public int damage = 10;
     public GameObject manager;
-    public float deathLength = .25F;
-    float deathTimer = -1;
+    public float colorChangeLength = .25F;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +28,7 @@ public class Meteor : MonoBehaviour
     {
         //transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
         // Changes state of meteor on beat
-        if (deathTimer != -1 && Time.time - deathTimer > deathLength)
-        {
-            Delete();
-        } 
+       
         if (beatCount == startBeat)
         {
             pariable = true;
@@ -71,20 +67,22 @@ public class Meteor : MonoBehaviour
             playerInside = null;
         }
     }
-    
+    bool black = true;
     // Message sent from MeteorManager to increment beat
     void incrementBeat()
     {
         beatCount++;
-        if (beatCount == startBeat + 4 && deathTimer == -1)
+        GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(1, 1, 0);
+        black = !black;
+
+        if (beatCount == startBeat + 4)
         {
             // Checks if player is still colliding with Meteor. If so, deal damage to player.
             if (playerInside != null)
             {
                 playerInside.SendMessage("Damage", damage);
             }
-            deathTimer = Time.time;
-            GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+            Delete();
         }
     }
 
@@ -93,6 +91,5 @@ public class Meteor : MonoBehaviour
     void Delete()
     {
         manager.SendMessage("Remove", this.gameObject);
-        Destroy(this.gameObject);
     }
 }

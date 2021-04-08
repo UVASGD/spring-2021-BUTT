@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4496837195746191358}
   - component: {fileID: 4496837195746191357}
   - component: {fileID: 4496837195746191330}
-  - component: {fileID: 4496837195746191329}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -121,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmount: 100
   player: {fileID: 0}
+  damage: 1
 --- !u!61 &4496837195746191330
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,16 +147,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4496837195746191329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4496837195746191356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adccfac8837e4d746842e6fda1aebb3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1

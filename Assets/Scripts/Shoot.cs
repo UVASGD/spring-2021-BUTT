@@ -32,8 +32,7 @@ public class Shoot : MonoBehaviour
             laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
         }
         if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && Mathf.Abs(musicManager.TimeToNextBeat()) < shootOnBeatLeniency) { 
-            print("Time to beat: " + Mathf.Abs(musicManager.TimeToNextBeat()));
-        FireLaser();
+            FireLaser();
         }
     }
     void FireBullet()
@@ -59,6 +58,7 @@ public class Shoot : MonoBehaviour
         RaycastHit2D[] laserHits = Physics2D.CapsuleCastAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.localScale.x, transform.localScale.y),
             CapsuleDirection2D.Horizontal, 0, bulletDirection2D, laserLength);
         foreach (RaycastHit2D collision in laserHits){
+            print("TAG" + collision.collider.tag);
             if (collision.collider != null && collision.collider.tag == "Enemy")
             {
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
