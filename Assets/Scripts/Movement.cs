@@ -5,9 +5,13 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float forceAmount = 100;
+    public MusicManager musicManager;
 
     private Rigidbody2D rb;
     private Transform tf;
+    private float teleportTime;
+    private bool teleporting;
+    private Vector3 tempTeleport;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +40,22 @@ public class Movement : MonoBehaviour
         {
             rb.AddForce(new Vector2(forceAmount,0));
         }
+        if (teleporting)
+        {
+            teleportTime -= Time.deltaTime;
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Vector3 temp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            tf.position = new Vector3(temp.x, temp.y, 0);
+            tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            teleportTime = Mathf.Abs(musicManager.TimeToNextBeat());
+            teleporting = true;
+        }
+        if (teleporting && teleportTime <= 0)
+        {
+            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
             rb.velocity = new Vector3(0, 0, 0);
+            teleporting = false;
+            teleportTime = 0;
         }
     }
 }
