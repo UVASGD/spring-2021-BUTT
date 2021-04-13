@@ -31,7 +31,7 @@ public class MeteorManager : MonoBehaviour
     {
         // Moves each meteor on beat
         float temp = Random.Range(0, 5);
-        if(temp < 3)
+        if(beatNum %4 == 0 && temp < 4)
         {
             Invoke("SpawnMeteor", 0);
         }

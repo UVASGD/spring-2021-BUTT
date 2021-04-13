@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    int beatCount;
-    int startBeat;
+    int beatCount = 0;
     float initialPosition;
     bool pariable;
     GameObject playerInside;
     public int damage = 10;
     public GameObject manager;
-    public float colorChangeLength = .25F;
+    public int beatsToDrop = 4;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<CircleCollider2D>().enabled = false;
-        startBeat = 2;
         initialPosition = transform.position.y;
         playerInside = null;
         pariable = false;
@@ -29,11 +27,11 @@ public class Meteor : MonoBehaviour
         //transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
         // Changes state of meteor on beat
        
-        if (beatCount == startBeat)
+        if (beatCount == 3)
         {
             pariable = true;
         }
-        if (beatCount == startBeat + 3)
+        if (beatCount == 2)
         {
             GetComponent<CircleCollider2D>().enabled = true;
         }
@@ -75,7 +73,7 @@ public class Meteor : MonoBehaviour
         GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(1, 1, 0);
         black = !black;
 
-        if (beatCount == startBeat + 4)
+        if (beatCount == beatsToDrop - 1 )
         {
             // Checks if player is still colliding with Meteor. If so, deal damage to player.
             if (playerInside != null)
@@ -90,6 +88,8 @@ public class Meteor : MonoBehaviour
     // Destroys current object
     void Delete()
     {
+        GetComponent<SpriteRenderer>().enabled = false;
+
         manager.SendMessage("Remove", this.gameObject);
     }
 }
