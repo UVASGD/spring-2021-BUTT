@@ -58,13 +58,12 @@ public class Shoot : MonoBehaviour
         RaycastHit2D[] laserHits = Physics2D.CapsuleCastAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.localScale.x, transform.localScale.y),
             CapsuleDirection2D.Horizontal, 0, bulletDirection2D, laserLength);
         foreach (RaycastHit2D collision in laserHits){
-            print("TAG" + collision.collider.tag);
             if (collision.collider != null && collision.collider.tag == "Enemy")
             {
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
             }
         }
-
+        musicManager.RateAction();
         GetComponent<Parry>().ammo--;
         Vector3 laserTip = bulletDirection * laserLength;
         laser.SetPositions(new Vector3[] { Vector3.zero, laserTip });

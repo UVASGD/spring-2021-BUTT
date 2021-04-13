@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public float teleportLeniency = .06F;
     public float forceAmount = 100;
     public MusicManager musicManager;
 
@@ -49,8 +50,9 @@ public class Movement : MonoBehaviour
             tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             teleportTime = Mathf.Abs(musicManager.TimeToNextBeat());
             teleporting = true;
+            musicManager.RateAction();
         }
-        if (teleporting && teleportTime <= 0)
+        if (teleporting) //&& teleportTime <= 0)
         {
             tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
             rb.velocity = new Vector3(0, 0, 0);
