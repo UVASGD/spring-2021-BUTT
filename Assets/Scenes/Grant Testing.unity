@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2cb7f7f7c8b19499eaa181236b7409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arIndicatorPrefab: {fileID: 4033335362313077690, guid: 3442ee883799191458acfadc819af557, type: 3}
+  arIndicatorPrefab: {fileID: 4688670498341039653, guid: b953c25b954666e4db3e7f8fbce1adec, type: 3}
 --- !u!4 &1591765652
 Transform:
   m_ObjectHideFlags: 0
