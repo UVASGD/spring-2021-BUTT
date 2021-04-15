@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionRatingIndicator : MonoBehaviour
+public class ActionRatingController : MonoBehaviour
 {
-    SpriteRenderer sr;
-    public Sprite[] sprites;
+    public GameObject arIndicatorPrefab;
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
- 
+        
     }
     public void ShowActionRating(ActionRating ar)
     {
-        sr = GetComponent<SpriteRenderer>();
-        sr.sprite = sprites[(int)ar];
+
+        GameObject arIndicator = Instantiate(arIndicatorPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        arIndicator.SendMessage("ShowActionRating", ar);
     }
 }

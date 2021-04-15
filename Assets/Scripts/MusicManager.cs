@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     [Header("Control When Beats Happen (Seconds)")]
     public float initialDelay = 0F;  // How long before the music starts 
     public float betweenBeatDelay = .461538462F; // How long in between beats
-    public ActionRatingIndicator arIndicator;
+    public ActionRatingController arIndicator;
     AudioSource source;
 
     float beats = 0;
