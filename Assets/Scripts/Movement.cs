@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             rb.AddForce(new Vector2(0,forceAmount));
         }
@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             rb.AddForce(new Vector2(forceAmount,0));
-        }*/
+        }
         if (teleporting)
         {
             teleportTime -= Time.deltaTime;
