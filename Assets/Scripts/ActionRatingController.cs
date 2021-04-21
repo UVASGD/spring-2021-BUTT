@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActionRatingController : MonoBehaviour
 {
+    bool black = false;
     public GameObject arIndicatorPrefab;
     // Start is called before the first frame update
     void Start()

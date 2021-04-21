@@ -26,7 +26,6 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (lastLaserFire != -1 && Time.time - lastLaserFire > laserDuration )
         {
             laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
@@ -66,7 +65,8 @@ public class Shoot : MonoBehaviour
         musicManager.RateAction();
         GetComponent<Parry>().ammo--;
         Vector3 laserTip = bulletDirection * laserLength;
-        laser.SetPositions(new Vector3[] { Vector3.zero, laserTip });
+        laserTip.z = 6;
+        laser.SetPositions(new Vector3[] { new Vector3(0,0,6), laserTip });
         this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * bulletDirection);
 
     }

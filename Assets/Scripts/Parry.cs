@@ -81,7 +81,6 @@ public class Parry : MonoBehaviour
 
         if (parrying)
         {
-            print("parry successful");
             parrying = false;
             cooldownTimer = cooldownLengthSeconds;
             sprite.color = new Color(1, 1, 1, 1);
@@ -90,7 +89,6 @@ public class Parry : MonoBehaviour
         else
         {
             lastDamage = damage;
-            print("setting leniency");
             leniencyTimer = parryLeniencySeconds;
         }
     }
