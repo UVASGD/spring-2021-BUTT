@@ -30,7 +30,7 @@ public class Shoot : MonoBehaviour
         {
             laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
         }
-        if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && Mathf.Abs(musicManager.TimeToNextBeat()) < shootOnBeatLeniency) { 
+        if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && musicManager.RateAction() != ActionRating.INVALID) { 
             FireLaser();
         }
     }

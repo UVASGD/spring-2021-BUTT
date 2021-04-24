@@ -70,19 +70,24 @@ public class MusicManager : MonoBehaviour
     /**
      * Gives a number indicating how far we are from a beat. If we are closer to the last beat than the next one, returns the time since the last beat. Otherwise returns -1 * the time to the next beat
      */
-    public float TimeToNextBeat()
+    private float TimeSinceLastBeat()
     {
+        float timeSinceLastBeat = source.time - lastActionTime;
+        float timeToNextBeat = (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure + lastActionTime - source.time;
+        return timeSinceLastBeat < timeToNextBeat ? timeSinceLastBeat : -timeToNextBeat;
+        /* CODE FOR CONSTANT LENGTH BEATS:
         float timeSinceLastBeat = source.time - initialDelay - (beats - 1) * betweenBeatDelay;
         return timeSinceLastBeat < betweenBeatDelay / 2F ? timeSinceLastBeat : timeSinceLastBeat - betweenBeatDelay; //return the distance to the last beat or the next beat, whichever is closest
+        */
+
     }
 
     public ActionRating RateAction()
     {
         ActionRating ar;
-        float timeToNextBeat = Mathf.Abs(TimeToNextBeat());
+        float timeToNextBeat = Mathf.Abs(TimeSinceLastBeat());
         if (timeToNextBeat <= perfectWindowLength)
-        {
-
+        { 
             ar = ActionRating.PERFECT;
         }
         else
@@ -106,5 +111,5 @@ public class MusicManager : MonoBehaviour
 } 
 public enum ActionRating
 {
-    BAD, OK, GOOD, PERFECT
+    BAD, OK, GOOD, PERFECT, INVALID
 }

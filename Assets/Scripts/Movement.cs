@@ -48,16 +48,12 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            teleportTime = Mathf.Abs(musicManager.TimeToNextBeat());
-            teleporting = true;
-            musicManager.RateAction();
+            if (musicManager.RateAction() != ActionRating.INVALID) { 
+                tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
+                rb.velocity = new Vector3(0, 0, 0);
+                teleporting = false;
+            }
         }
-        if (teleporting) //&& teleportTime <= 0)
-        {
-            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
-            rb.velocity = new Vector3(0, 0, 0);
-            teleporting = false;
-            teleportTime = 0;
-        }
+        
     }
 }

@@ -529,6 +529,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: recoilForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: musicManager
       value: 
       objectReference: {fileID: 337830119}
@@ -603,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 1591765651}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: initialDelay
-      value: 0.23076925
+      value: 3.923081
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatPredictor
@@ -619,7 +623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatWaitTimes.Array.size
-      value: 18
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.data[0]
@@ -643,7 +647,7 @@ PrefabInstance:
       objectReference: {fileID: 396846297}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatWaitTimes.Array.data[0]
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatWaitTimes.Array.data[1]
