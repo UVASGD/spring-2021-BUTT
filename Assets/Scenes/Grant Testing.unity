@@ -618,6 +618,10 @@ PrefabInstance:
       value: 0.461539
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: perfectWindowLength
+      value: 0.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.size
       value: 2
       objectReference: {fileID: 0}
