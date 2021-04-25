@@ -30,13 +30,13 @@ public class MeteorManager : MonoBehaviour
         {
             int x = Random.Range(0, 4);
             if(x == 0)
-                newMeteor = (GameObject)Instantiate(meteor, new Vector3(-6, 2.5F, -9), transform.rotation);
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(-3, 2.5F, -9), transform.rotation);
             else if(x == 1)
-                newMeteor = (GameObject)Instantiate(meteor, new Vector3(6, 2.5F, -9), transform.rotation);
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(3, 2.5F, -9), transform.rotation);
             else if(x == 2)
-                newMeteor = (GameObject)Instantiate(meteor, new Vector3(-6, -1.5F, -9), transform.rotation);
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(-3, -1.5F, -9), transform.rotation);
             else
-                newMeteor = (GameObject)Instantiate(meteor, new Vector3(6, -1.5F, -9), transform.rotation);
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(3, -1.5F, -9), transform.rotation);
         }
         newMeteor.SendMessage("SetUp", this.gameObject);
         meteorList.Add(newMeteor);

@@ -7,6 +7,9 @@ public class EnemyAI : MonoBehaviour
     public float forceAmount = 3;
     public GameObject player;
     public float damage = 1;
+    public GameObject goal;
+    public GameObject manager;
+
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -19,19 +22,28 @@ public class EnemyAI : MonoBehaviour
     {
       
     }
-    public void Setup(GameObject player)
+    public void Setup(GameObject player, GameObject Egoal, GameObject EnemyManager)
     {
         rb = GetComponent<Rigidbody2D>();
+        manager = EnemyManager;
+        if (Egoal != null)
+        {
+            goal = Egoal;
+        }
+        else
+        {
+            goal = player;
+        }
         this.player = player;
     }
     public void OnBeat(int beatNum) { 
         Vector2 forceToApply;
         Transform enemyTransform = this.gameObject.GetComponent<Transform>();
-        Transform playerTransform = player.GetComponent<Transform>();
+        Transform goalTransform = goal.GetComponent<Transform>();
         // operator override means we can just subtract directly
-        Vector3 vecToPlayer = playerTransform.position - enemyTransform.position;
+        Vector3 vecToGoal = goalTransform.position - enemyTransform.position;
         // don't care about Z difference
-        forceToApply = new Vector2(vecToPlayer.x, vecToPlayer.y);
+        forceToApply = new Vector2(vecToGoal.x, vecToGoal.y);
         forceToApply.Normalize();
         forceToApply = forceToApply* forceAmount;
 
@@ -54,7 +66,15 @@ public class EnemyAI : MonoBehaviour
     {
         if (coll.gameObject.tag == "Player")
         {
-            coll.gameObject.SendMessage("Damage", damage);
+            player.SendMessage("Damage", damage);
+            Delete();
         }
+    }
+
+    void Delete()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        manager.SendMessage("Remove", this.gameObject);
     }
 }

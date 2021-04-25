@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
             health -= 1;
         }
         if (healthRegen && health < maxHealth)
-            health += 0.02F;
+            health += 0.01F;
     }
 
     // Reduce player health by the given quantity.
