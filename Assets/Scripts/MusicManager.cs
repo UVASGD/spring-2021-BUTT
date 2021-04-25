@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,8 @@ public class MusicManager : MonoBehaviour
     int currentAction = 0;
     float lastDisplayTime;
     int currentDisplayAction = 0;
-    bool black = false;
+    public GameObject cameraObject;
+    //bool black = false;
     AudioSource source;
 
 
@@ -35,8 +37,7 @@ public class MusicManager : MonoBehaviour
         float curSongTime = source.time;
         while (curSongTime - lastDisplayTime + beatsPerMeasure * betweenBeatDelay >= (1.0/beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure)
         {
-            print("Instantiating Event " + curSongTime + " "+ currentDisplayAction);
-            Instantiate(beatPredictor, this.transform);
+            Instantiate(beatPredictor, cameraObject.transform);
             lastDisplayTime += (1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure;
             currentDisplayAction = (currentDisplayAction + 1) % beatWaitTimes.Length;
 
@@ -44,33 +45,47 @@ public class MusicManager : MonoBehaviour
         if (curSongTime - lastActionTime > (1.0/beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure) // percentage of a measure for this beat times the length of a measure assuming 4/4
         {
 
-            print("Firing Event " + curSongTime+ " " + currentDisplayAction);
             foreach (GameObject receiver in actionBeatReceivers)
             {
-                receiver.SendMessage("OnActionBeat", currentAction);
+                try
+                {
+                    receiver.SendMessage("OnActionBeat", beats);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
             lastActionTime += (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure;
             currentAction = (currentAction + 1) % beatWaitTimes.Length;
-            SwitchColor();
+            IndicatorOnBeat();
         }
         if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
         {
             foreach (GameObject receiver in beatReceivers)
             {
-                receiver.SendMessage("OnBeat", beats);
+                try
+                {
+                    receiver.SendMessage("OnBeat", beats);
+                } catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
             beats++;
         }
     }
-    void SwitchColor()
+    void IndicatorOnBeat()
     {
-        GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(0, 0, 0);
-        black = !black;
+        GetComponent<Animator>().SetTrigger("Beat");
+
+//        GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(0, 0, 0);
+//        black = !black;
     }
     /**
      * Gives a number indicating how far we are from a beat. If we are closer to the last beat than the next one, returns the time since the last beat. Otherwise returns -1 * the time to the next beat
      */
-    private float TimeSinceLastBeat()
+    float TimeSinceLastBeat()
     {
         float timeSinceLastBeat = source.time - lastActionTime;
         float timeToNextBeat = (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure + lastActionTime - source.time;

@@ -9,11 +9,11 @@ public class Movement : MonoBehaviour
     public MusicManager musicManager;
     public bool disableMovement = false;
     public bool fourQuads = false;
+    public bool teleEnabled = true;
 
     private Rigidbody2D rb;
     private Transform tf;
-    private float teleportTime;
-    private bool teleporting;
+   
     private Vector3 tempTeleport;
     // Start is called before the first frame update
     void Start()
@@ -46,38 +46,53 @@ public class Movement : MonoBehaviour
                 rb.AddForce(new Vector2(forceAmount, 0));
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (teleEnabled)
         {
             tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (fourQuads)
+            
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if(tempTeleport.x < 0 && tempTeleport.y >= 0.4F)
+                if (musicManager.RateAction() != ActionRating.INVALID)
                 {
-                    tempTeleport.x = -6;
-                    tempTeleport.y = 2.5F;
+                    Teleport(1);
                 }
-                else if (tempTeleport.x >= 0 && tempTeleport.y >= 0.4F)
-                {
-                    tempTeleport.x = 6;
-                    tempTeleport.y = 2.5F;
-                }
-                else if (tempTeleport.x < 0 && tempTeleport.y < 0.4F)
-                {
-                    tempTeleport.x = -6;
-                    tempTeleport.y = -1.5F;
-                }
-                else
-                {
-                    tempTeleport.x = 6;
-                    tempTeleport.y = -1.5F;
-                }
-            }
-            if (musicManager.RateAction() != ActionRating.INVALID) { 
-                tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
-                rb.velocity = new Vector3(0, 0, 0);
-                teleporting = false;
             }
         }
         
+    }
+    public void Teleport(float percent)
+    {
+        tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (fourQuads)
+        {
+            if (tempTeleport.x < 0 && tempTeleport.y >= 0.4F)
+            {
+                tempTeleport.x = -6;
+                tempTeleport.y = 2.5F;
+            }
+            else if (tempTeleport.x >= 0 && tempTeleport.y >= 0.4F)
+            {
+                tempTeleport.x = 6;
+                tempTeleport.y = 2.5F;
+            }
+            else if (tempTeleport.x < 0 && tempTeleport.y < 0.4F)
+            {
+                tempTeleport.x = -6;
+                tempTeleport.y = -1.5F;
+            }
+            else
+            {
+                tempTeleport.x = 6;
+                tempTeleport.y = -1.5F;
+            }
+            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
+        }
+        else
+        {
+            Vector3 vec2Mouse = tempTeleport - tf.position;
+            vec2Mouse.z = 0;
+            tf.position += percent * vec2Mouse;
+        }
+        rb.velocity = new Vector3(0, 0, 0);
     }
 }
