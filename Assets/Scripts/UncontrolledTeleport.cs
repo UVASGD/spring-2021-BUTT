@@ -22,12 +22,14 @@ public class UncontrolledTeleport : MonoBehaviour
        
         if (beat % 2 == 1)
         {
+            /*
             Vector3 tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 vec2Mouse = tempTeleport - transform.position;
             vec2Mouse.z = 0;
             vec2Mouse.Normalize();
             transform.position += vec2Mouse * teleLength;
-            rb.velocity = new Vector3(0, 0, 0);
+            rb.velocity = new Vector3(0, 0, 0);*/
+            movementScript.Teleport(1);
             /*Vector3 tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
           Vector3 vec2Mouse = tempTeleport - transform.position;
           // don't care about Z difference
@@ -41,10 +43,13 @@ public class UncontrolledTeleport : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        /*Vector3 tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 vec2Mouse = tempTeleport - transform.position;
+        vec2Mouse.z = 0;
         vec2Mouse.Normalize();
         teleIndicator.transform.position = transform.position + teleLength * vec2Mouse;
         teleIndicator.transform.position -= new Vector3(0, 0, teleIndicator.transform.position.z);
+        */
+
     }
 }

@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83eb1e58afba129468fc231ad112fe7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmount: 30
+  teleLength: 2
   teleIndicator: {fileID: 587624885}
 --- !u!1 &489059594 stripped
 GameObject:
@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &587624886
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1002,12 +1002,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3375811318237510061, guid: 793309b0504bb12468107581fd421bd3, type: 3}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: okWindowLength
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: betweenBeatDelay
       value: 0.461539
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: goodWindowLength
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: perfectWindowLength
-      value: 0.061
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.size
