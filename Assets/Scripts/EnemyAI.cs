@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     public float damage = 1;
     public GameObject goal;
     public GameObject manager;
+    public int beatToJump = 1;
 
     private Rigidbody2D rb;
     // Start is called before the first frame update
@@ -47,12 +48,9 @@ public class EnemyAI : MonoBehaviour
         forceToApply.Normalize();
         forceToApply = forceToApply* forceAmount;
 
-        if (beatNum % 2 == 1)
+        if (beatNum % 2 == beatToJump)
         {
-
             rb.AddForce(forceToApply, ForceMode2D.Impulse);
-
-        
         }
        
         
