@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,7 +26,6 @@ public class EnemyAI : MonoBehaviour
     }
     public void OnBeat(int beatNum) { 
         Vector2 forceToApply;
-
         Transform enemyTransform = this.gameObject.GetComponent<Transform>();
         Transform playerTransform = player.GetComponent<Transform>();
         // operator override means we can just subtract directly

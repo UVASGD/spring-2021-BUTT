@@ -9,7 +9,7 @@ public class Parry : MonoBehaviour
 
     public int maxHealth = 10;
     public float parryLeniencySeconds = .025F;
-    
+    public bool parryEnabled = false;
     public float cooldownLengthSeconds = 1;
 
     [Header("Debug Info")]
@@ -44,7 +44,7 @@ public class Parry : MonoBehaviour
         {
             leniencyTimer -= Time.deltaTime;
         }
-        if (Input.GetMouseButtonDown(1) && cooldownTimer <=0)
+        if (Input.GetMouseButtonDown(1) && cooldownTimer <=0 && parryEnabled)
         {
             if (leniencyTimer > 0) //got hit before parrying
             {

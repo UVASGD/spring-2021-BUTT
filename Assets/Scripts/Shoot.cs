@@ -12,7 +12,7 @@ public class Shoot : MonoBehaviour
     public float shootOnBeatLeniency = .06F;
     public float laserDuration = .1F;
     public Rigidbody2D bullet;
-    
+    public bool shootEnabled = true;
     LineRenderer laser;
     float lastLaserFire = -1;
     // Start is called before the first frame update
@@ -26,12 +26,16 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lastLaserFire != -1 && Time.time - lastLaserFire > laserDuration )
+        if (shootEnabled)
         {
-            laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
-        }
-        if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && musicManager.RateAction() != ActionRating.INVALID) { 
-            FireLaser();
+            if (lastLaserFire != -1 && Time.time - lastLaserFire > laserDuration)
+            {
+                laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
+            }
+            if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && musicManager.RateAction() != ActionRating.INVALID)
+            {
+                FireLaser();
+            }
         }
     }
     void FireBullet()
