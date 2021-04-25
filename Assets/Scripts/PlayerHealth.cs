@@ -6,7 +6,8 @@ public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
     public int maxHealth = 100;
-    public int health;
+    public float health;
+    public bool healthRegen = false;
     void Start() {
         health = maxHealth;
     }
@@ -17,14 +18,20 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X)) {
             health -= 1;
         }
+        if (healthRegen && health < maxHealth)
+            health += 0.02F;
     }
 
     // Reduce player health by the given quantity.
     public void LowerHealth(int damage) {
         health -= damage;
+        if (health < 0)
+            health = 0;
     }
 
     public void RaiseHealth(int heal) {
         health += heal;
+        if (health > maxHealth)
+            health = maxHealth;
     }
 }

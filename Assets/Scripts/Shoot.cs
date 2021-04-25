@@ -13,6 +13,7 @@ public class Shoot : MonoBehaviour
     public float laserDuration = .1F;
     public Rigidbody2D bullet;
     public bool shootEnabled = true;
+
     LineRenderer laser;
     float lastLaserFire = -1;
     // Start is called before the first frame update
@@ -58,8 +59,10 @@ public class Shoot : MonoBehaviour
         bulletDirection = new Vector3(bulletDirection.x, bulletDirection.y, 0);
         Vector2 bulletDirection2D = new Vector2(bulletDirection.x, bulletDirection.y);
         bulletDirection.Normalize();
+
         RaycastHit2D[] laserHits = Physics2D.CapsuleCastAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.localScale.x, transform.localScale.y),
             CapsuleDirection2D.Horizontal, 0, bulletDirection2D, laserLength);
+
         foreach (RaycastHit2D collision in laserHits){
             if (collision.collider != null && collision.collider.tag == "Enemy")
             {

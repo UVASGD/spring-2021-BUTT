@@ -7,8 +7,10 @@ public class Movement : MonoBehaviour
     public float teleportLeniency = .06F;
     public float forceAmount = 100;
     public MusicManager musicManager;
+    public bool disableMovement = false;
+    public bool fourQuads = false;
     public bool teleEnabled = true;
-    public bool wasdEnabled = true;
+
     private Rigidbody2D rb;
     private Transform tf;
    
@@ -25,9 +27,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (wasdEnabled)
+        if (!disableMovement)
         {
-
             if (Input.GetKey(KeyCode.W))
             {
                 rb.AddForce(new Vector2(0, forceAmount));
@@ -44,10 +45,11 @@ public class Movement : MonoBehaviour
             {
                 rb.AddForce(new Vector2(forceAmount, 0));
             }
-           
         }
         if (teleEnabled)
         {
+            tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (musicManager.RateAction() != ActionRating.INVALID)
@@ -61,9 +63,36 @@ public class Movement : MonoBehaviour
     public void Teleport(float percent)
     {
         tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 vec2Mouse = tempTeleport - tf.position;
-        vec2Mouse.z = 0;
-        tf.position += percent * vec2Mouse;
+        if (fourQuads)
+        {
+            if (tempTeleport.x < 0 && tempTeleport.y >= 0.4F)
+            {
+                tempTeleport.x = -6;
+                tempTeleport.y = 2.5F;
+            }
+            else if (tempTeleport.x >= 0 && tempTeleport.y >= 0.4F)
+            {
+                tempTeleport.x = 6;
+                tempTeleport.y = 2.5F;
+            }
+            else if (tempTeleport.x < 0 && tempTeleport.y < 0.4F)
+            {
+                tempTeleport.x = -6;
+                tempTeleport.y = -1.5F;
+            }
+            else
+            {
+                tempTeleport.x = 6;
+                tempTeleport.y = -1.5F;
+            }
+            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
+        }
+        else
+        {
+            Vector3 vec2Mouse = tempTeleport - tf.position;
+            vec2Mouse.z = 0;
+            tf.position += percent * vec2Mouse;
+        }
         rb.velocity = new Vector3(0, 0, 0);
     }
 }
