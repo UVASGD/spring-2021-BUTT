@@ -866,6 +866,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1591765651}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 45990214}
+    - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: initialDelay
       value: 3.923081
       objectReference: {fileID: 0}
