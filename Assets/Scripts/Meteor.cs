@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    int beatCount = 0;
-    float initialPosition;
-    bool pariable;
-    GameObject playerInside;
     public int damage = 10;
     public GameObject manager;
     public int beatsToDrop = 4;
+    public bool progressiveOpacity;
+
+    int beatCount = 0;
+    float initialPosition;
+    GameObject playerInside;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<CircleCollider2D>().enabled = false;
         initialPosition = transform.position.y;
         playerInside = null;
-        pariable = false;
         damage = 10;
     }
 
@@ -26,21 +26,25 @@ public class Meteor : MonoBehaviour
     {
         //transform.position = new Vector3(transform.position.x, initialPosition - beatCount, transform.position.z);
         // Changes state of meteor on beat
-       
-        if (beatCount == 3)
+
+        Color temp;
+        if (beatCount == 0)
         {
-            pariable = true;
+            temp = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, 0.33F);
+        }
+        if (beatCount == 1)
+        {
+            temp = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, 0.8F);
         }
         if (beatCount == 2)
         {
+            temp = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, 1);
             GetComponent<CircleCollider2D>().enabled = true;
         }
        
-    }
-
-    bool getPariable()
-    {
-        return pariable;
     }
 
     void SetUp(GameObject MeteorManager)

@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
         if (spawnedEnemies.Count < maxEnemies && Random.value < spawnRate) //spawn randomly, but average out to spawnRate enemies per beat
         {
             float rotation = Random.value * Mathf.PI * 2;
-            GameObject newEnemy = (GameObject)Instantiate(enemyPrefab, spawnDistance * new Vector3(Mathf.Sin(rotation), Mathf.Cos(rotation), 0), this.gameObject.transform.rotation);
+            GameObject newEnemy = (GameObject)Instantiate(enemyPrefab, spawnDistance * new Vector3(Mathf.Sin(rotation), Mathf.Cos(rotation), 7), this.gameObject.transform.rotation);
             EnemyAI newAI = newEnemy.GetComponent<EnemyAI>();
             newAI.Setup(player);
             spawnedEnemies.Add(newAI);

@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour
     public float teleportLeniency = .06F;
     public float forceAmount = 100;
     public MusicManager musicManager;
+    public bool disableMovement = false;
+    public bool fourQuads = false;
 
     private Rigidbody2D rb;
     private Transform tf;
@@ -25,29 +27,51 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (!disableMovement)
         {
-            rb.AddForce(new Vector2(0,forceAmount));
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(new Vector2(-forceAmount,0));
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(new Vector2(0,-forceAmount));
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(new Vector2(forceAmount,0));
-        }
-        if (teleporting)
-        {
-            teleportTime -= Time.deltaTime;
+            if (Input.GetKey(KeyCode.W))
+            {
+                rb.AddForce(new Vector2(0, forceAmount));
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.AddForce(new Vector2(-forceAmount, 0));
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                rb.AddForce(new Vector2(0, -forceAmount));
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                rb.AddForce(new Vector2(forceAmount, 0));
+            }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (fourQuads)
+            {
+                if(tempTeleport.x < 0 && tempTeleport.y >= 0.4F)
+                {
+                    tempTeleport.x = -6;
+                    tempTeleport.y = 2.5F;
+                }
+                else if (tempTeleport.x >= 0 && tempTeleport.y >= 0.4F)
+                {
+                    tempTeleport.x = 6;
+                    tempTeleport.y = 2.5F;
+                }
+                else if (tempTeleport.x < 0 && tempTeleport.y < 0.4F)
+                {
+                    tempTeleport.x = -6;
+                    tempTeleport.y = -1.5F;
+                }
+                else
+                {
+                    tempTeleport.x = 6;
+                    tempTeleport.y = -1.5F;
+                }
+            }
             if (musicManager.RateAction() != ActionRating.INVALID) { 
                 tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
                 rb.velocity = new Vector3(0, 0, 0);
