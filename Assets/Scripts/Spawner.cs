@@ -20,13 +20,6 @@ public class Spawner : MonoBehaviour
     }
     void OnBeat(int beat)
     {
-        for (int i = 0; i < removeList.Count;)
-        {
-            GameObject rem = removeList[i];
-            spawnedEnemies.Remove(rem.GetComponent<EnemyAI>());
-            removeList.Remove(rem);
-            Destroy(rem);
-        }
         if (spawnedEnemies.Count < maxEnemies && Random.value < spawnRate) //spawn randomly, but average out to spawnRate enemies per beat
         {
             GameObject newEnemy;
@@ -81,6 +74,13 @@ public class Spawner : MonoBehaviour
                 spawnedEnemies.RemoveAt(i);
                 i--;
             }
+        }
+        for (int i = 0; i < removeList.Count;)
+        {
+            GameObject rem = removeList[i];
+            spawnedEnemies.Remove(rem.GetComponent<EnemyAI>());
+            removeList.Remove(rem);
+            Destroy(rem);
         }
     }
     // Update is called once per frame
