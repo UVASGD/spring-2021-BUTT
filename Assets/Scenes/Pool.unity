@@ -393,6 +393,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1053782997
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053782993}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ed141028a61ef341989a26e47304140, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1171367875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 208506102502709993, guid: b953c25b954666e4db3e7f8fbce1adec, type: 3}
@@ -725,6 +744,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: teleEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: wasdEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: musicManager
       value: 
       objectReference: {fileID: 337830119}
@@ -865,6 +892,10 @@ PrefabInstance:
       propertyPath: arIndicator
       value: 
       objectReference: {fileID: 1591765651}
+    - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 45990214}
     - target: {fileID: 6711420386854222930, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: initialDelay
       value: 3.923081

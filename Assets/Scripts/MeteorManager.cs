@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeteorManager : MonoBehaviour
 {
     public List<GameObject> meteorList;
+    public bool setPos = false;
     List<GameObject> removeList = new List<GameObject>();
 
     public GameObject meteor;
@@ -22,7 +23,21 @@ public class MeteorManager : MonoBehaviour
 
     void SpawnMeteor()
     {
-        GameObject newMeteor = (GameObject)Instantiate(meteor, new Vector3(Random.Range(-11, 11), Random.Range(-0, 4), 0), transform.rotation);
+        GameObject newMeteor = null;
+        if(!setPos)
+            newMeteor = (GameObject)Instantiate(meteor, new Vector3(Random.Range(-11, 11), Random.Range(-0, 4), 0), transform.rotation);
+        else
+        {
+            int x = Random.Range(0, 4);
+            if(x == 0)
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(-3, 2.5F, -9), transform.rotation);
+            else if(x == 1)
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(3, 2.5F, -9), transform.rotation);
+            else if(x == 2)
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(-3, -1.5F, -9), transform.rotation);
+            else
+                newMeteor = (GameObject)Instantiate(meteor, new Vector3(3, -1.5F, -9), transform.rotation);
+        }
         newMeteor.SendMessage("SetUp", this.gameObject);
         meteorList.Add(newMeteor);
     }
