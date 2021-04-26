@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f50081c46518647903d12710b87566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstLevelScene: Grant Testing 2
+  firstLevelScene: RecoilOnlyCopy
 --- !u!1 &556551808
 GameObject:
   m_ObjectHideFlags: 0
