@@ -85,7 +85,7 @@ public class Movement : MonoBehaviour
                 tempTeleport.x = 3;
                 tempTeleport.y = -1.5F;
             }
-            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
+            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, -1);
         }
         else
         {
