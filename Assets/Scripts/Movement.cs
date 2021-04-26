@@ -67,22 +67,22 @@ public class Movement : MonoBehaviour
         {
             if (tempTeleport.x < 0 && tempTeleport.y >= 0.4F)
             {
-                tempTeleport.x = -6;
+                tempTeleport.x = -3;
                 tempTeleport.y = 2.5F;
             }
             else if (tempTeleport.x >= 0 && tempTeleport.y >= 0.4F)
             {
-                tempTeleport.x = 6;
+                tempTeleport.x = 3;
                 tempTeleport.y = 2.5F;
             }
             else if (tempTeleport.x < 0 && tempTeleport.y < 0.4F)
             {
-                tempTeleport.x = -6;
+                tempTeleport.x = -3;
                 tempTeleport.y = -1.5F;
             }
             else
             {
-                tempTeleport.x = 6;
+                tempTeleport.x = 3;
                 tempTeleport.y = -1.5F;
             }
             tf.position = new Vector3(tempTeleport.x, tempTeleport.y, 0);
