@@ -29,21 +29,43 @@ public class Movement : MonoBehaviour
     {
         if (!disableMovement)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (!fourQuads)
             {
-                rb.AddForce(new Vector2(0, forceAmount));
+                if (Input.GetKey(KeyCode.W))
+                {
+                    rb.AddForce(new Vector2(0, forceAmount));
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    rb.AddForce(new Vector2(-forceAmount, 0));
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    rb.AddForce(new Vector2(0, -forceAmount));
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    rb.AddForce(new Vector2(forceAmount, 0));
+                }
             }
-            if (Input.GetKey(KeyCode.A))
+            else
             {
-                rb.AddForce(new Vector2(-forceAmount, 0));
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                rb.AddForce(new Vector2(0, -forceAmount));
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb.AddForce(new Vector2(forceAmount, 0));
+                if (Input.GetKeyDown(KeyCode.A) && tf.position.x > 0 && musicManager.RateAction() != ActionRating.INVALID)
+                {
+                    tf.position = new Vector3(-3, tf.position.y, -1);
+                }
+                if (Input.GetKeyDown(KeyCode.D) && tf.position.x < 0 && musicManager.RateAction() != ActionRating.INVALID)
+                {
+                    tf.position = new Vector3(3, tf.position.y, -1);
+                }
+                if (Input.GetKeyDown(KeyCode.W) && tf.position.y < 0 && musicManager.RateAction() != ActionRating.INVALID)
+                {
+                    tf.position = new Vector3(tf.position.x, 2.5F, -1);
+                }
+                if (Input.GetKeyDown(KeyCode.S) && tf.position.y > 0 && musicManager.RateAction() != ActionRating.INVALID)
+                {
+                    tf.position = new Vector3(tf.position.x, -1.5F, -1);
+                }
             }
         }
         if (teleEnabled)
@@ -63,36 +85,9 @@ public class Movement : MonoBehaviour
     public void Teleport(float percent)
     {
         tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (fourQuads)
-        {
-            if (tempTeleport.x < 0 && tempTeleport.y >= 0.4F)
-            {
-                tempTeleport.x = -3;
-                tempTeleport.y = 2.5F;
-            }
-            else if (tempTeleport.x >= 0 && tempTeleport.y >= 0.4F)
-            {
-                tempTeleport.x = 3;
-                tempTeleport.y = 2.5F;
-            }
-            else if (tempTeleport.x < 0 && tempTeleport.y < 0.4F)
-            {
-                tempTeleport.x = -3;
-                tempTeleport.y = -1.5F;
-            }
-            else
-            {
-                tempTeleport.x = 3;
-                tempTeleport.y = -1.5F;
-            }
-            tf.position = new Vector3(tempTeleport.x, tempTeleport.y, -1);
-        }
-        else
-        {
-            Vector3 vec2Mouse = tempTeleport - tf.position;
-            vec2Mouse.z = 0;
-            tf.position += percent * vec2Mouse;
-        }
+        Vector3 vec2Mouse = tempTeleport - tf.position;
+        vec2Mouse.z = 0;
+        tf.position += percent * vec2Mouse;
         rb.velocity = new Vector3(0, 0, 0);
     }
 }

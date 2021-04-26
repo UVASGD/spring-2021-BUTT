@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1441666354867775688, guid: 1d0f36aab9bc86f4186549a1739916a7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 74.54
+      value: 127.28
       objectReference: {fileID: 0}
     - target: {fileID: 1441666354867775688, guid: 1d0f36aab9bc86f4186549a1739916a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1441666354867775688, guid: 1d0f36aab9bc86f4186549a1739916a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 1441666354867775688, guid: 1d0f36aab9bc86f4186549a1739916a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -695,7 +695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5757751127561506055, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -7.64
+      value: -6.82
       objectReference: {fileID: 0}
     - target: {fileID: 5757751127561506055, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1103,12 +1103,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: teleEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: musicManager
       value: 
       objectReference: {fileID: 337830119}
     - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: disableMovement
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146193, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: m_Constraints
