@@ -13,6 +13,8 @@ public class Shoot : MonoBehaviour
     public float laserDuration = .1F;
     public Rigidbody2D bullet;
     public bool shootEnabled = true;
+    public bool notLaser = false;
+    public bool fourQuads = false;
 
     LineRenderer laser;
     float lastLaserFire = -1;
@@ -38,19 +40,26 @@ public class Shoot : MonoBehaviour
                 ActionRating ar = musicManager.RateAction();
                 if (ar != ActionRating.INVALID)
                 {
-                    
-                    switch (ar)
-                    {
-                        case ActionRating.GOOD:
-                            FireLaserBoostGood();
-                            break;
-                        case ActionRating.PERFECT:
-                            FireLaserBoostPerfect();
-                            break;
-                        default:
-                            FireLaser();
-                            break;
 
+                    if (!notLaser)
+                    {
+                        switch (ar)
+                        {
+                            case ActionRating.GOOD:
+                                FireLaserBoostGood();
+                                break;
+                            case ActionRating.PERFECT:
+                                FireLaserBoostPerfect();
+                                break;
+                            default:
+                                FireLaser();
+                                break;
+
+                        }
+                    }
+                    else
+                    {
+                        FireBullet();
                     }
                     
                 }
@@ -60,7 +69,30 @@ public class Shoot : MonoBehaviour
     }
     void FireBullet()
     {
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 worldPosition = new Vector3(0, 0, 0);
+        if (!fourQuads)
+        {
+            worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else
+        {
+            if (transform.position.x < 0 && transform.position.y > 0)
+            {
+                worldPosition = new Vector3(-14F, 2.5F, -10);
+            }
+            else if (transform.position.x > 0 && transform.position.y > 0)
+            {
+                worldPosition = new Vector3(14F, 2.5F, -10);
+            }
+            else if (transform.position.x < 0 && transform.position.y < 0)
+            {
+                worldPosition = new Vector3(-14F, -1.5F, -10);
+            }
+            else
+            {
+                worldPosition = new Vector3(14F, -1.5F, -10);
+            }
+        }
         Vector3 bulletDirection = worldPosition - transform.position;
         bulletDirection = new Vector3(bulletDirection.x, bulletDirection.y, 0);
         bulletDirection.Normalize();

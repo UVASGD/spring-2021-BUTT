@@ -65,14 +65,7 @@ public class EnemyAI : MonoBehaviour
         if (coll.gameObject.tag == "Player")
         {
             player.SendMessage("Damage", damage);
-            Delete();
+            Destroy(this.gameObject);
         }
-    }
-
-    void Delete()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-
-        manager.SendMessage("Remove", this.gameObject);
     }
 }

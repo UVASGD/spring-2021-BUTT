@@ -11,7 +11,6 @@ public class Spawner : MonoBehaviour
     public List<GameObject> goals = new List<GameObject>();
     public bool toggleFour = false;
 
-    List<GameObject> removeList = new List<GameObject>();
     List<EnemyAI> spawnedEnemies = new List<EnemyAI>();
     // Start is called before the first frame update
     void Start()
@@ -42,6 +41,7 @@ public class Spawner : MonoBehaviour
                 else
                     startPos = new Vector3(13.4F, -1.5F, 7);
                 newEnemy = (GameObject)Instantiate(enemyPrefab, startPos, this.gameObject.transform.rotation);
+                newEnemy.SendMessage("Bullet");
             }
             EnemyAI newAI = newEnemy.GetComponent<EnemyAI>();
             int minIndex = -1;
@@ -75,22 +75,10 @@ public class Spawner : MonoBehaviour
                 i--;
             }
         }
-        for (int i = 0; i < removeList.Count;)
-        {
-            GameObject rem = removeList[i];
-            spawnedEnemies.Remove(rem.GetComponent<EnemyAI>());
-            removeList.Remove(rem);
-            Destroy(rem);
-        }
     }
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    void Remove(GameObject toRemove)
-    {
-        removeList.Add(toRemove);
     }
 }
