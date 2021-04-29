@@ -15,7 +15,7 @@ public class Shoot : MonoBehaviour
     public bool shootEnabled = true;
     public bool notLaser = false;
     public bool fourQuads = false;
-
+    public bool ratedLaser = false;
     LineRenderer laser;
     float lastLaserFire = -1;
     // Start is called before the first frame update
@@ -43,18 +43,25 @@ public class Shoot : MonoBehaviour
 
                     if (!notLaser)
                     {
-                        switch (ar)
+                        if (ratedLaser)
                         {
-                            case ActionRating.GOOD:
-                                FireLaserBoostGood();
-                                break;
-                            case ActionRating.PERFECT:
-                                FireLaserBoostPerfect();
-                                break;
-                            default:
-                                FireLaser();
-                                break;
 
+                            switch (ar)
+                            {
+                                case ActionRating.GOOD:
+                                    FireLaserBoostGood();
+                                    break;
+                                case ActionRating.PERFECT:
+                                    FireLaserBoostPerfect();
+                                    break;
+                                default:
+                                    FireLaser();
+                                    break;
+
+                            }
+                        } else
+                        {
+                            FireLaser();
                         }
                     }
                     else
@@ -120,7 +127,6 @@ public class Shoot : MonoBehaviour
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
             }
         }
-        musicManager.RateAction();
         GetComponent<Parry>().ammo--;
         Vector3 laserTip = bulletDirection * laserLength;
         laserTip.z = 6;
@@ -146,7 +152,6 @@ public class Shoot : MonoBehaviour
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
             }
         }
-        musicManager.RateAction();
         GetComponent<Parry>().ammo--;
         Vector3 laserTip = bulletDirection * laserLength;
         laserTip.z = 6;
@@ -172,7 +177,6 @@ public class Shoot : MonoBehaviour
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
             }
         }
-        musicManager.RateAction();
         GetComponent<Parry>().ammo--;
         Vector3 laserTip = bulletDirection * laserLength;
         laserTip.z = 6;

@@ -5,12 +5,11 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float forceAmount = 3;
-    public GameObject player;
     public float damage = 1;
     public GameObject goal;
     public GameObject manager;
     public int beatToJump = 1;
-
+    GameObject player;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -27,6 +26,7 @@ public class EnemyAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         manager = EnemyManager;
+        this.player = player;
         if (Egoal != null)
         {
             goal = Egoal;
@@ -35,7 +35,6 @@ public class EnemyAI : MonoBehaviour
         {
             goal = player;
         }
-        this.player = player;
     }
     public void OnBeat(int beatNum) { 
         Vector2 forceToApply;

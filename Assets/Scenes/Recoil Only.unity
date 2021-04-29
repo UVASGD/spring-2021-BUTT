@@ -320,6 +320,10 @@ PrefabInstance:
       value: LavaWall
       objectReference: {fileID: 0}
     - target: {fileID: 4496837195746191357, guid: b6ec8461fce99fd4184db81d2e0a77f2, type: 3}
+      propertyPath: goal
+      value: 
+      objectReference: {fileID: 396846297}
+    - target: {fileID: 4496837195746191357, guid: b6ec8461fce99fd4184db81d2e0a77f2, type: 3}
       propertyPath: damage
       value: 999
       objectReference: {fileID: 0}
@@ -626,6 +630,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 870533222774347988, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
+      propertyPath: spawnRate
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 870533222774347988, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 4496837195746191356, guid: b6ec8461fce99fd4184db81d2e0a77f2, type: 3}
@@ -813,7 +821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: recoilForce
-      value: 1000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: musicManager
