@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject goal;
     public GameObject manager;
     public int beatToJump = 1;
-
+    GameObject player;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         manager = EnemyManager;
+        this.player = player;
         if (Egoal != null)
         {
             goal = Egoal;
@@ -62,15 +63,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (coll.gameObject.tag == "Player")
         {
-            coll.gameObject.SendMessage("Damage", damage);
-            Delete();
+            player.SendMessage("Damage", damage);
+            Destroy(this.gameObject);
         }
-    }
-
-    void Delete()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-
-        manager.SendMessage("Remove", this.gameObject);
     }
 }

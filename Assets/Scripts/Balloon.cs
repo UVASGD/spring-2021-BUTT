@@ -13,14 +13,17 @@ public class Balloon : MonoBehaviour
     public float inRadius = .42F, outRadius = .8F;
     public float minDisplayMagnitude= .25F;
     public float force = 500;
-    public float gravityIncrement = 0.05F;
-    public float forceIncrement = 1;
+    public float percentIncrement = .01F;
+    float origForce, origGrav;
     // Start is called before the first frame update
     void Start()
     {
+
         shootScript = GetComponent<Shoot>();
         head = GetComponent<LineRenderer>();
         rb = this.GetComponent<Rigidbody2D>();
+        origForce = force;
+        origGrav = rb.gravityScale;
     }
 
     // Update is called once per frame
@@ -51,8 +54,8 @@ public class Balloon : MonoBehaviour
                 rb.AddForce(-force * vec2Mouse, ForceMode2D.Impulse);
             }
             float actionScore = (4F - ((float)ar % 4))/4F;
-            rb.gravityScale += gravityIncrement * actionScore;
-            force += forceIncrement * actionScore;
+            rb.gravityScale += percentIncrement * actionScore  * origGrav;
+            force += percentIncrement * actionScore * origForce;
 
         }
         if (Input.GetMouseButtonDown(1))

@@ -13,7 +13,9 @@ public class Shoot : MonoBehaviour
     public float laserDuration = .1F;
     public Rigidbody2D bullet;
     public bool shootEnabled = true;
-
+    public bool notLaser = false;
+    public bool fourQuads = false;
+    public bool ratedLaser = false;
     LineRenderer laser;
     float lastLaserFire = -1;
     // Start is called before the first frame update
@@ -33,15 +35,71 @@ public class Shoot : MonoBehaviour
             {
                 laser.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
             }
-            if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0 && musicManager.RateAction() != ActionRating.INVALID)
+            if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0)
             {
-                FireLaser();
+                ActionRating ar = musicManager.RateAction();
+                if (ar != ActionRating.INVALID)
+                {
+
+                    if (!notLaser)
+                    {
+                        if (ratedLaser)
+                        {
+
+                            switch (ar)
+                            {
+                                case ActionRating.GOOD:
+                                    FireLaserBoostGood();
+                                    break;
+                                case ActionRating.PERFECT:
+                                    FireLaserBoostPerfect();
+                                    break;
+                                default:
+                                    FireLaser();
+                                    break;
+
+                            }
+                        } else
+                        {
+                            FireLaser();
+                        }
+                    }
+                    else
+                    {
+                        FireBullet();
+                    }
+                    
+                }
+                
             }
         }
     }
     void FireBullet()
     {
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 worldPosition = new Vector3(0, 0, 0);
+        if (!fourQuads)
+        {
+            worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else
+        {
+            if (transform.position.x < 0 && transform.position.y > 0)
+            {
+                worldPosition = new Vector3(-14F, 2.5F, -10);
+            }
+            else if (transform.position.x > 0 && transform.position.y > 0)
+            {
+                worldPosition = new Vector3(14F, 2.5F, -10);
+            }
+            else if (transform.position.x < 0 && transform.position.y < 0)
+            {
+                worldPosition = new Vector3(-14F, -1.5F, -10);
+            }
+            else
+            {
+                worldPosition = new Vector3(14F, -1.5F, -10);
+            }
+        }
         Vector3 bulletDirection = worldPosition - transform.position;
         bulletDirection = new Vector3(bulletDirection.x, bulletDirection.y, 0);
         bulletDirection.Normalize();
@@ -76,4 +134,56 @@ public class Shoot : MonoBehaviour
         this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * bulletDirection);
 
     }
+
+    void FireLaserBoostGood()
+    {
+        lastLaserFire = Time.time;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 bulletDirection = worldPosition - transform.position;
+        bulletDirection = new Vector3(bulletDirection.x, bulletDirection.y, 0);
+        Vector2 bulletDirection2D = new Vector2(bulletDirection.x, bulletDirection.y);
+        bulletDirection.Normalize();
+        RaycastHit2D[] laserHits = Physics2D.CapsuleCastAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.localScale.x, transform.localScale.y),
+            CapsuleDirection2D.Horizontal, 0, bulletDirection2D, laserLength);
+        foreach (RaycastHit2D collision in laserHits)
+        {
+            if (collision.collider != null && collision.collider.tag == "Enemy")
+            {
+                collision.collider.gameObject.SendMessage("Damage", laserDamage);
+            }
+        }
+        GetComponent<Parry>().ammo--;
+        Vector3 laserTip = bulletDirection * laserLength;
+        laserTip.z = 6;
+        laser.SetPositions(new Vector3[] { new Vector3(0, 0, 6), laserTip });
+        this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * 3 * bulletDirection);
+
+    }
+
+    void FireLaserBoostPerfect()
+    {
+        lastLaserFire = Time.time;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 bulletDirection = worldPosition - transform.position;
+        bulletDirection = new Vector3(bulletDirection.x, bulletDirection.y, 0);
+        Vector2 bulletDirection2D = new Vector2(bulletDirection.x, bulletDirection.y);
+        bulletDirection.Normalize();
+        RaycastHit2D[] laserHits = Physics2D.CapsuleCastAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.localScale.x, transform.localScale.y),
+            CapsuleDirection2D.Horizontal, 0, bulletDirection2D, laserLength);
+        foreach (RaycastHit2D collision in laserHits)
+        {
+            if (collision.collider != null && collision.collider.tag == "Enemy")
+            {
+                collision.collider.gameObject.SendMessage("Damage", laserDamage);
+            }
+        }
+        GetComponent<Parry>().ammo--;
+        Vector3 laserTip = bulletDirection * laserLength;
+        laserTip.z = 6;
+        laser.SetPositions(new Vector3[] { new Vector3(0, 0, 6), laserTip });
+        this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * 5 * bulletDirection);
+
+    }
+
+
 }

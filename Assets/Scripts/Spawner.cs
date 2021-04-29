@@ -11,8 +11,10 @@ public class Spawner : MonoBehaviour
     public List<GameObject> goals = new List<GameObject>();
     public bool toggleFour = false;
 
+
     List<GameObject> removeList = new List<GameObject>();
     List<GameObject> spawnedEnemies = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public class Spawner : MonoBehaviour
                 else
                     startPos = new Vector3(13.4F, -1.5F, 7);
                 newEnemy = (GameObject)Instantiate(enemyPrefab, startPos, this.gameObject.transform.rotation);
+                newEnemy.SendMessage("Bullet");
             }
             EnemyAI newAI = newEnemy.GetComponent<EnemyAI>();
             int minIndex = -1;
@@ -87,10 +90,5 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void Remove(GameObject toRemove)
-    {
-        removeList.Add(toRemove);
     }
 }

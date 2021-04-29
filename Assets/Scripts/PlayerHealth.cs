@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public float health;
     public bool healthRegen = false;
+    public float regen = 0.01F;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (healthRegen && health < maxHealth)
         {
-            health += 0.01F;
+            health += regen;
         }
 
         if (health <= 0)

@@ -310,8 +310,7 @@ MonoBehaviour:
   outRadius: 0.8
   minDisplayMagnitude: 18
   force: 10
-  gravityIncrement: 0.025
-  forceIncrement: 1
+  percentIncrement: 0.01
 --- !u!1 &407766603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1065,36 @@ Transform:
   m_Father: {fileID: 1237007296}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1679882819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1679882820}
+  m_Layer: 0
+  m_Name: Indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1679882820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679882819}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7026858, y: 1.9121993, z: -0.21041821}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2040134484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1350,6 +1379,10 @@ PrefabInstance:
       propertyPath: musicManager
       value: 
       objectReference: {fileID: 337830119}
+    - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: disableMovement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146193, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: m_LinearDrag
       value: 1
@@ -1413,6 +1446,10 @@ PrefabInstance:
     - target: {fileID: 6443348360421146196, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: notLaser
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: recoilForce
