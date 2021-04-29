@@ -69,7 +69,6 @@ public class Shoot : MonoBehaviour
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
             }
         }
-        musicManager.RateAction();
         GetComponent<Parry>().ammo--;
         Vector3 laserTip = bulletDirection * laserLength;
         laserTip.z = 6;

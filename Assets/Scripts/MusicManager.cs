@@ -23,20 +23,26 @@ public class MusicManager : MonoBehaviour
     public GameObject cameraObject;
     //bool black = false;
     AudioSource source;
-
-
+    public List<float> beatTimes;
+    
     float beats = 0;
     private void Start()
     {
         lastActionTime = lastDisplayTime = initialDelay;
         source = GetComponent<AudioSource>();
+        beatTimes = new List<float>();
+
     }
     private void Update()
     {
-
+        if (beatTimes.Count > 0 && Mathf.Abs(source.time - beatTimes[0]) > beatsPerMeasure * betweenBeatDelay)
+        {
+            beatTimes.RemoveAt(0);
+        }
         float curSongTime = source.time;
         while (curSongTime - lastDisplayTime + beatsPerMeasure * betweenBeatDelay >= (1.0/beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure)
         {
+            beatTimes.Add((1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure + lastDisplayTime);
             Instantiate(beatPredictor, cameraObject.transform);
             lastDisplayTime += (1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure;
             currentDisplayAction = (currentDisplayAction + 1) % beatWaitTimes.Length;
@@ -90,17 +96,32 @@ public class MusicManager : MonoBehaviour
         float timeSinceLastBeat = source.time - lastActionTime;
         float timeToNextBeat = (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure + lastActionTime - source.time;
         return timeSinceLastBeat < timeToNextBeat ? timeSinceLastBeat : -timeToNextBeat;
-        /* CODE FOR CONSTANT LENGTH BEATS:
-        float timeSinceLastBeat = source.time - initialDelay - (beats - 1) * betweenBeatDelay;
-        return timeSinceLastBeat < betweenBeatDelay / 2F ? timeSinceLastBeat : timeSinceLastBeat - betweenBeatDelay; //return the distance to the last beat or the next beat, whichever is closest
-        */
+       
 
     }
-
+    int an = 0;
     public ActionRating RateAction()
     {
+        an++;
+        print("AN " + an);
+        float curTime = source.time;
+        int bestI = -1;
+        float bestScore = 1000000000F;
+        for (int i = 0; i < beatTimes.Count; i++) {
+            if (Mathf.Abs(curTime - beatTimes[i]) < bestScore)
+            {
+                bestI = i;
+                bestScore = Mathf.Abs(curTime - beatTimes[i]);
+            } 
+        }
         ActionRating ar;
-        float timeToNextBeat = Mathf.Abs(TimeSinceLastBeat());
+        if (bestI == -1 || bestScore > okWindowLength)
+        {
+            arIndicator.ShowActionRating(ActionRating.BAD);
+            return ActionRating.INVALID;
+        }
+        beatTimes.RemoveAt(bestI);
+        float timeToNextBeat = bestScore;
         if (timeToNextBeat <= perfectWindowLength)
         { 
             ar = ActionRating.PERFECT;

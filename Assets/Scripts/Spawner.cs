@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     public bool toggleFour = false;
 
     List<GameObject> removeList = new List<GameObject>();
-    List<EnemyAI> spawnedEnemies = new List<EnemyAI>();
+    List<GameObject> spawnedEnemies = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -63,11 +63,11 @@ public class Spawner : MonoBehaviour
             {
                 newAI.Setup(player, goals[minIndex], this.gameObject);
             }
-            spawnedEnemies.Add(newAI);
+            spawnedEnemies.Add(newEnemy);
         }
         for (int i = 0; i < spawnedEnemies.Count; i++) {
             if (spawnedEnemies[i] != null) {
-                spawnedEnemies[i].OnBeat(beat);
+                spawnedEnemies[i].SendMessage("OnBeat", beat);
             }
             else
             {
@@ -78,7 +78,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < removeList.Count;)
         {
             GameObject rem = removeList[i];
-            spawnedEnemies.Remove(rem.GetComponent<EnemyAI>());
+            spawnedEnemies.Remove(rem);
             removeList.Remove(rem);
             Destroy(rem);
         }

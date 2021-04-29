@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float forceAmount = 3;
-    public GameObject player;
     public float damage = 1;
     public GameObject goal;
     public GameObject manager;
@@ -35,7 +34,6 @@ public class EnemyAI : MonoBehaviour
         {
             goal = player;
         }
-        this.player = player;
     }
     public void OnBeat(int beatNum) { 
         Vector2 forceToApply;
@@ -64,7 +62,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (coll.gameObject.tag == "Player")
         {
-            player.SendMessage("Damage", damage);
+            coll.gameObject.SendMessage("Damage", damage);
             Delete();
         }
     }
