@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Balloon : MonoBehaviour
 {
     public MusicManager mm;
@@ -13,12 +13,14 @@ public class Balloon : MonoBehaviour
     public float inRadius = .42F, outRadius = .8F;
     public float minDisplayMagnitude= .25F;
     public float force = 500;
+    float curPercent = 100;
     public float percentIncrement = .01F;
     float origForce, origGrav;
+    float scaleOverTime = .125F;
+    public TextMeshPro diffInd;
     // Start is called before the first frame update
     void Start()
     {
-
         shootScript = GetComponent<Shoot>();
         head = GetComponent<LineRenderer>();
         rb = this.GetComponent<Rigidbody2D>();
@@ -53,10 +55,12 @@ public class Balloon : MonoBehaviour
             {
                 rb.AddForce(-force * vec2Mouse, ForceMode2D.Impulse);
             }
-            float actionScore = (4F - ((float)ar % 4))/4F;
+            float actionScore = (3F - ((float)ar % 4))/3F;
+            actionScore += scaleOverTime;
             rb.gravityScale += percentIncrement * actionScore  * origGrav;
             force += percentIncrement * actionScore * origForce;
-
+            curPercent+= (actionScore*4);
+            diffInd.text = "Weight: " + (int)curPercent + "%";
         }
         if (Input.GetMouseButtonDown(1))
         {

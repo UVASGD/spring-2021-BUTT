@@ -103,7 +103,6 @@ public class MusicManager : MonoBehaviour
     public ActionRating RateAction()
     {
         an++;
-        print("AN " + an);
         float curTime = source.time;
         int bestI = -1;
         float bestScore = 1000000000F;
