@@ -33,13 +33,26 @@ public class MusicManager : MonoBehaviour
         beatTimes = new List<float>();
 
     }
+    int curReps;
+    float lastSTime = -1;
+    float getSourceTime()
+    {
+        float sTime = source.time;
+        if (sTime < lastSTime - 1) //restarted song
+        {
+            curReps++;
+        }
+        lastSTime = sTime;
+        return curReps*source.clip.length + sTime;
+    }
     private void Update()
     {
-        if (beatTimes.Count > 0 && Mathf.Abs(source.time - beatTimes[0]) > beatsPerMeasure * betweenBeatDelay)
+        float sourceTime = getSourceTime();
+        if (beatTimes.Count > 0 && Mathf.Abs(sourceTime - beatTimes[0]) > beatsPerMeasure * betweenBeatDelay)
         {
             beatTimes.RemoveAt(0);
         }
-        float curSongTime = source.time;
+        float curSongTime = sourceTime;
         while (curSongTime - lastDisplayTime + beatsPerMeasure * betweenBeatDelay >= (1.0/beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure)
         {
             beatTimes.Add((1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure + lastDisplayTime);
@@ -93,8 +106,8 @@ public class MusicManager : MonoBehaviour
      */
     float TimeSinceLastBeat()
     {
-        float timeSinceLastBeat = source.time - lastActionTime;
-        float timeToNextBeat = (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure + lastActionTime - source.time;
+        float timeSinceLastBeat = getSourceTime() - lastActionTime;
+        float timeToNextBeat = (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure + lastActionTime - getSourceTime();
         return timeSinceLastBeat < timeToNextBeat ? timeSinceLastBeat : -timeToNextBeat;
        
 
@@ -103,7 +116,7 @@ public class MusicManager : MonoBehaviour
     public ActionRating RateAction()
     {
         an++;
-        float curTime = source.time;
+        float curTime = getSourceTime();
         int bestI = -1;
         float bestScore = 1000000000F;
         for (int i = 0; i < beatTimes.Count; i++) {

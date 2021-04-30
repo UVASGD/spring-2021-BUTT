@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Recoil Only.unity
+    guid: e8d049f93c453794e92f6a5de0968a27
+  - enabled: 1
+    path: Assets/Scenes/death_screen.unity
+    guid: 0c21c2219dc5e794da29d641bbb349f7
   m_configObjects: {}

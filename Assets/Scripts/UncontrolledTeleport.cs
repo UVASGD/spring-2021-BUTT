@@ -12,6 +12,7 @@ public class UncontrolledTeleport : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         movementScript = GetComponent<Movement>();
         shootScript = GetComponent<Shoot>();
@@ -29,7 +30,7 @@ public class UncontrolledTeleport : MonoBehaviour
             vec2Mouse.Normalize();
             transform.position += vec2Mouse * teleLength;
             rb.velocity = new Vector3(0, 0, 0);*/
-            movementScript.Teleport(1);
+            movementScript.Teleport(.9999F);
             /*Vector3 tempTeleport = Camera.main.ScreenToWorldPoint(Input.mousePosition);
           Vector3 vec2Mouse = tempTeleport - transform.position;
           // don't care about Z difference

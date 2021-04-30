@@ -40,7 +40,7 @@ public class Balloon : MonoBehaviour
         vec2Mouse.z = 0;
         mousePos.z = 6;
         vec2Mouse.Normalize();
-        Vector3 lineStart = transform.position + vec2Mouse * outRadius;
+        Vector3 lineStart = transform.position + vec2Mouse * (outRadius + inRadius)/2;
         lineStart.z = 0;
 
         line.SetPosition(0, lineStart + Vector3.forward * 6);

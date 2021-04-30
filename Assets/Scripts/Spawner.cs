@@ -22,8 +22,12 @@ public class Spawner : MonoBehaviour
     }
     void OnBeat(int beat)
     {
-        if (spawnedEnemies.Count < maxEnemies && Random.value < spawnRate) //spawn randomly, but average out to spawnRate enemies per beat
+        
+        float tempSpawnRate = spawnRate;
+        tempSpawnRate -= Random.value;
+        while (spawnedEnemies.Count < maxEnemies && tempSpawnRate > 0) //spawn randomly, but average out to spawnRate enemies per beat
         {
+            tempSpawnRate -= Random.value;
             GameObject newEnemy;
             if (!toggleFour)
             {

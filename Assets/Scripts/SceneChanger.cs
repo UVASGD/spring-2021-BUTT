@@ -16,22 +16,4 @@ public class SceneChanger : MonoBehaviour
      * Called from the starting menu to load the first level scene of the game.
      * Set the firstLevelScene variable to the scene's name to configure which scene gets loaded.
      */
-    public void FirstLevel()
-    {
-        ChangeScene(firstLevelScene);
-    }
-
-    public void ChangeScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            ChangeScene(firstLevelScene);
-        }
-    }
 }
