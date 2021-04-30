@@ -9,7 +9,9 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public float health;
     public bool healthRegen = false;
+    public bool healthDegen = false;
     public float regen = 0.01F;
+    public float degen = 0.1F;
 
     void Start()
     {
@@ -32,6 +34,11 @@ public class PlayerHealth : MonoBehaviour
         if (healthRegen)
         {
             health += regen;
+            health = Mathf.Min(health, maxHealth);
+        }
+        if (healthDegen)
+        {
+            health -= degen;
             health = Mathf.Min(health, maxHealth);
         }
     }

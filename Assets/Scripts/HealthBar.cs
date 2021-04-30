@@ -7,6 +7,7 @@ public class HealthBar : MonoBehaviour {
     private Image healthbar;
     public GameObject player;
     private int maxHealth;
+   
     // Start is called before the first frame update
     void Start() {
         healthbar = GetComponent<Image>();
@@ -17,5 +18,7 @@ public class HealthBar : MonoBehaviour {
     void Update() {
         float health = player.GetComponent<PlayerHealth>().health;
         healthbar.fillAmount = health / maxHealth;
+
+
     }
 }
