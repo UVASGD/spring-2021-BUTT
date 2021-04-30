@@ -24,15 +24,15 @@ public class PlayerHealth : MonoBehaviour
             health -= 1;
         }
 
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("death_screen");
+        }
+
         if (healthRegen)
         {
             health += regen;
             health = Mathf.Min(health, maxHealth);
-        }
-
-        if (health <= 0)
-        {
-            SceneManager.LoadScene("death_screen");
         }
     }
 
