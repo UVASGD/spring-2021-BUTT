@@ -108,7 +108,7 @@ public class MusicManager : MonoBehaviour
         }
         if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
         {
-            if ((beats - beatStart) > beatsPerMeasure)
+            if ((beats - beatStart) >= beatsPerMeasure)
             {
                 foreach (GameObject receiver in beatReceivers)
                 {
@@ -130,7 +130,13 @@ public class MusicManager : MonoBehaviour
     }
     void IndicatorOnBeat()
     {
-        GetComponent<Animator>().SetTrigger("Beat");
+        if ((beats - beatStart) >= beatsPerMeasure)
+        {
+            GetComponent<Animator>().SetTrigger("Beat");
+        } else
+        {
+            GetComponent<AudioSource>().Play();
+        }
 
 //        GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(0, 0, 0);
 //        black = !black;
