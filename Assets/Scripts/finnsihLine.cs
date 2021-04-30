@@ -42,7 +42,7 @@ public class finnsihLine : MonoBehaviour
         forceToApply.Normalize();
         forceToApply = forceToApply * forceAmount;
 
-        rb.AddForce(forceToApply);
+        
     }
 
 }
