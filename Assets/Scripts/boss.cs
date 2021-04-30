@@ -6,9 +6,9 @@ public class boss : MonoBehaviour
 {
 
     public float damage = 1;
-    public GameObject goal;
+    //public GameObject goal;
     public GameObject manager;
-    public int beatToJump = 1;
+    //public int beatToJump = 1;
     public GameObject player;
     private Rigidbody2D rb;
     // Start is called before the first frame update
@@ -21,10 +21,10 @@ public class boss : MonoBehaviour
     void Update()
     {
         Transform enemyTransform = this.gameObject.GetComponent<Transform>();
-        Transform playerTransform = player.GetComponent<enemyTransform>();
+        Transform playerTransform = player.GetComponent<Transform>();
 
-        vecToPLayer = playerTransform.position - enemyTransform.position;
+        //vecToPLayer = playerTransform.position - enemyTransform.position;
 
-        tranform.position = Vector2.MoveTowards()
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 1);
     }
 }
