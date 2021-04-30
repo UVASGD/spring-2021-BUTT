@@ -28,7 +28,7 @@ public class MusicManager : MonoBehaviour
     public float perfectScoreInc = .2F;
     static int beats = 0;
     bool start = false;
-    bool beatStart = -1;
+    int beatStart = -1;
     private void Start()
     {
         start = true;
@@ -108,7 +108,7 @@ public class MusicManager : MonoBehaviour
         }
         if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
         {
-            if (!start)
+            if ((beats - beatStart) > beatsPerMeasure)
             {
                 foreach (GameObject receiver in beatReceivers)
                 {
@@ -121,9 +121,11 @@ public class MusicManager : MonoBehaviour
                         Console.WriteLine(e.ToString());
                     }
                 }
+            } else
+            {
+                print("Skip!");
             }
             beats++;
-            start = beats - beatStart > beatsPerMeasure;
         }
     }
     void IndicatorOnBeat()
