@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bar = GetComponent<Image>();
         isGauntlet = ButtonScript.isGauntlet;  
         if (!isGauntlet)
         {
