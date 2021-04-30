@@ -19,7 +19,8 @@ public class Shoot : MonoBehaviour
     LineRenderer laser;
     public float scaleOverTime = .125F;
     public float percentInc = 1F;
-    float curPercent = 100;
+    static float curTelePercent = 100;
+    static float curRecPercent = 100;
     public TextMeshPro diffInd;
     public bool recoilOnly = false;
     float lastLaserFire = -1;
@@ -64,19 +65,19 @@ public class Shoot : MonoBehaviour
 
                     float actionScore = (3F - ((float)ar % 4)) / 3F;
                     actionScore += scaleOverTime;
-                    curPercent += actionScore * percentInc;
-                    diffInd.text = "Speed: " + (int)curPercent + "%";
-                    lavaWall1.forceAmount = lavaWallSpeed * curPercent / 100F;
-                    lavaWall2.forceAmount = -lavaWallSpeed * curPercent / 100F;
+                    curRecPercent += actionScore * percentInc;
+                    diffInd.text = "Speed: " + (int)curRecPercent + "%";
+                    lavaWall1.forceAmount = lavaWallSpeed * curRecPercent / 100F;
+                    lavaWall2.forceAmount = -lavaWallSpeed * curRecPercent / 100F;
 
                 }
                 if (randTele)
                 {
                     float actionScore = (3F - ((float)ar % 4)) / 3F;
                     actionScore += scaleOverTime;
-                    curPercent += actionScore * percentInc;
-                    diffInd.text = "Spawnrate: " + (int)curPercent + "%";
-                    spawner.spawnRate = initSpawnRate * curPercent / 100F;
+                    curTelePercent += actionScore * percentInc;
+                    diffInd.text = "Rate: " + (int)curTelePercent + "%";
+                    spawner.spawnRate = initSpawnRate * curTelePercent / 100F;
                 }
                 if (ar != ActionRating.INVALID)
                 {

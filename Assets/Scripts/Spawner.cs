@@ -10,7 +10,8 @@ public class Spawner : MonoBehaviour
     public float spawnDistance = 10;
     public List<GameObject> goals = new List<GameObject>();
     public bool toggleFour = false;
-
+    public ScoreManager scoreManager;
+    public float killScoreInc= .5F;
 
     List<GameObject> removeList = new List<GameObject>();
     List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -78,12 +79,14 @@ public class Spawner : MonoBehaviour
             }
             else
             {
+                ScoreManager.score += killScoreInc;
                 spawnedEnemies.RemoveAt(i);
                 i--;
             }
         }
         for (int i = 0; i < removeList.Count;)
         {
+            ScoreManager.score += killScoreInc;
             GameObject rem = removeList[i];
             spawnedEnemies.Remove(rem);
             removeList.Remove(rem);

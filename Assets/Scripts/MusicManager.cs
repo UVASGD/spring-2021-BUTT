@@ -16,25 +16,50 @@ public class MusicManager : MonoBehaviour
     [Header("The interval difference between beats. For example, if we want 4 16th notes, put 16,16,16,16")]
     public float[] beatWaitTimes;
     public GameObject beatPredictor;
-    float lastActionTime;
-    int currentAction = 0;
-    float lastDisplayTime;
-    int currentDisplayAction = 0;
+    static float lastActionTime = 0;
+    static int currentAction = 0;
+    static float lastDisplayTime;
+    static int currentDisplayAction = 0;
     public GameObject cameraObject;
     //bool black = false;
-    AudioSource source;
+    public AudioSource source;
     public List<float> beatTimes;
-    
-    float beats = 0;
+    public ScoreManager scoreManager;
+    public float perfectScoreInc = .2F;
+    static int beats = 0;
+    bool start = false;
+    int beatStart = -1;
     private void Start()
     {
-        lastActionTime = lastDisplayTime = initialDelay;
-        source = GetComponent<AudioSource>();
+        start = true;
+        beatStart = beats;
+        source = GameObject.Find("SoundPlayer").GetComponent<AudioSource>();
         beatTimes = new List<float>();
+        float curBeat = beats % (int)beatsPerMeasure;
+        print("curBeat " + curBeat);
+        int i;
+        for (i = 0; ; i = (i + 1) % beatWaitTimes.Length)
+        {
+            curBeat -= beatsPerMeasure / beatWaitTimes[i];
+            if (curBeat < 1F / 128F)
+            {
+                break;
+            }
+           
+        }
+        currentAction = i;
+        currentDisplayAction = i;
+        print("Therefore " + i);
+        if (lastActionTime == 0)
+        {
+            lastActionTime = lastDisplayTime = initialDelay;
+        }
+       
 
     }
-    int curReps;
-    float lastSTime = -1;
+    static int curReps;
+    //static float startTime = 0;
+    static float lastSTime = -1;
     float getSourceTime()
     {
         float sTime = source.time;
@@ -47,7 +72,9 @@ public class MusicManager : MonoBehaviour
     }
     private void Update()
     {
+
         float sourceTime = getSourceTime();
+        //print("STIME " + sourceTime);
         if (beatTimes.Count > 0 && Mathf.Abs(sourceTime - beatTimes[0]) > beatsPerMeasure * betweenBeatDelay)
         {
             beatTimes.RemoveAt(0);
@@ -81,15 +108,22 @@ public class MusicManager : MonoBehaviour
         }
         if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
         {
-            foreach (GameObject receiver in beatReceivers)
+            if ((beats - beatStart) > beatsPerMeasure)
             {
-                try
+                foreach (GameObject receiver in beatReceivers)
                 {
-                    receiver.SendMessage("OnBeat", beats);
-                } catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
+                    try
+                    {
+                        receiver.SendMessage("OnBeat", beats);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
                 }
+            } else
+            {
+                print("Skip!");
             }
             beats++;
         }
@@ -137,6 +171,7 @@ public class MusicManager : MonoBehaviour
         if (timeToNextBeat <= perfectWindowLength)
         { 
             ar = ActionRating.PERFECT;
+            ScoreManager.score += perfectScoreInc;
         }
         else
         if (timeToNextBeat <= goodWindowLength)
