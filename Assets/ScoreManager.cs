@@ -7,20 +7,26 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
+    static string curScene = "Recoil Only";
+    static int numSwitches = 1;
+    string[] scenes = new string[] { "Recoil Only", "FourQuads", "TeleportOnly", "Hackeysack"};
+
     bool isGauntlet;
-    public float neededScore = 100;
-    public float score = 0;
+    float neededScore = 100;
+    public static float score = 0;
     public TextMeshPro scoreIndicator;
     public string nextSceneName;
     Image bar;
+    float startingScore;
     // Start is called before the first frame update
     void Start()
     {
+        startingScore = score;
         bar = GetComponent<Image>();
         isGauntlet = ButtonScript.isGauntlet;  
         if (!isGauntlet)
         {
-            bar.enabled = false;
+            bar.fillAmount = 1;
         }
     }
 
@@ -29,14 +35,33 @@ public class ScoreManager : MonoBehaviour
     {
         if (isGauntlet)
         {
-            bar.fillAmount = score / neededScore;
-            if (score >= neededScore)
+            bar.fillAmount = (ScoreManager.score % neededScore) / neededScore;
+            if (ScoreManager.score - startingScore >= neededScore)
             {
-                SceneManager.LoadScene(nextSceneName);
+                
+                curScene = scenes[numSwitches%scenes.Length];
+                numSwitches++;
+                if (numSwitches % scenes.Length == 0)
+                {
+                    reshuffle(scenes);
+                }
+                SceneManager.LoadScene(curScene);
             }
         }
 
-        scoreIndicator.text = "Score: " + score;
+        scoreIndicator.text = "Score: " + score.ToString("F2");
     }
+    void reshuffle(string[] texts)
+    {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+        for (int t = 0; t < texts.Length; t++)
+        {
+            string tmp = texts[t];
+            int r = Random.Range(t, texts.Length);
+            texts[t] = texts[r];
+            texts[r] = tmp;
+        }
+    }
+
 }
 

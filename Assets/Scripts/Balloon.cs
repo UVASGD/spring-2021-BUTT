@@ -13,7 +13,7 @@ public class Balloon : MonoBehaviour
     public float inRadius = .42F, outRadius = .8F;
     public float minDisplayMagnitude= .25F;
     public float force = 500;
-    float curPercent = 100;
+    static float curPercent = 100;
     public float percentIncrement = .01F;
     float origForce, origGrav;
     float scaleOverTime = .125F;
@@ -57,8 +57,8 @@ public class Balloon : MonoBehaviour
             }
             float actionScore = (3F - ((float)ar % 4))/3F;
             actionScore += scaleOverTime;
-            rb.gravityScale += percentIncrement * actionScore  * origGrav;
-            force += percentIncrement * actionScore * origForce;
+            rb.gravityScale = curPercent/100F * origGrav;
+            force = curPercent/100F * origForce;
             curPercent+= (actionScore*4);
             diffInd.text = "Weight: " + (int)curPercent + "%";
         }
