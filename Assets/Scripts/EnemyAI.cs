@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject goal;
     public GameObject manager;
     public int beatToJump = 1;
-    GameObject player;
+    public GameObject player;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
