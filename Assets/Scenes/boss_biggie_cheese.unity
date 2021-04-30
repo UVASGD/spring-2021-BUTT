@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c54ebb15e3068b49b0c107f0b7c0ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 50
+  direction: 15
 --- !u!114 &1035732709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +835,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+      propertyPath: beatReceivers.Array.data[0]
+      value: 
+      objectReference: {fileID: 685744261088101849, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
+    - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+      propertyPath: beatReceivers.Array.data[1]
+      value: 
+      objectReference: {fileID: 6443348360421146196, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
     - target: {fileID: 6083321067088895411, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: orthographic size
       value: 8.227806
