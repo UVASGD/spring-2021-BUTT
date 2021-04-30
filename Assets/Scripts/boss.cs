@@ -20,6 +20,11 @@ public class boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Transform enemyTransform = this.gameObject.GetComponent<Transform>();
+        Transform playerTransform = player.GetComponent<enemyTransform>();
+
+        vecToPLayer = playerTransform.position - enemyTransform.position;
+
+        tranform.position = Vector2.MoveTowards()
     }
 }
