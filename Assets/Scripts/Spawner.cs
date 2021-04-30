@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour
 
     List<GameObject> removeList = new List<GameObject>();
     List<GameObject> spawnedEnemies = new List<GameObject>();
+    
 
     // Start is called before the first frame update
     void Start()

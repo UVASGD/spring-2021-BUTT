@@ -38,7 +38,7 @@ public class enemy_dos : MonoBehaviour
     public void OnBeat(int beatNum)
     {
         
-        if (beatNum / 2 == 0)
+        if (beatNum % 4 == 0)
         {
             laserFire = true;
         }
