@@ -1196,7 +1196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatWaitTimes.Array.size
@@ -1217,7 +1217,7 @@ PrefabInstance:
     - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: beatReceivers.Array.data[3]
       value: 
-      objectReference: {fileID: 396846297}
+      objectReference: {fileID: 0}
     - target: {fileID: 6711420386854222929, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: m_RootOrder
       value: 1
