@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     }
     void OnBeat(int beat)
     {
-        
+        print("spawner onbeat");
         float tempSpawnRate = spawnRate;
         tempSpawnRate -= Random.value;
         while (spawnedEnemies.Count < maxEnemies && tempSpawnRate > 0) //spawn randomly, but average out to spawnRate enemies per beat

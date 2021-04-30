@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     static string curScene = "Recoil Only";
     static int numSwitches = 1;
-    string[] scenes = new string[] { "Recoil Only", "FourQuads", "TeleportOnly", "Hackeysack"};
+    string[] scenes = new string[] { "Recoil Only", "FourQuads", "TeleportOnly",  "Hackeysack"};
 
     bool isGauntlet;
     float neededScore = 100;
@@ -45,6 +45,7 @@ public class ScoreManager : MonoBehaviour
                 {
                     reshuffle(scenes);
                 }
+                print("Awefawefjoawenfnawefnawenfnaewnfnaewfbawefhaewuifaeiwfjoijaewfoijaweofiawhfea;hewfuiahewfiuhawehluawleiuhflaiuwhefliaubewfbawfebwefuhwefiuewfwefbefbwebfbwefbwbefbwefb");
                 SceneManager.LoadScene(curScene);
             }
         }

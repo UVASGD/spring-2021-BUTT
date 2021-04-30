@@ -2359,6 +2359,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 197914226}
     - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: initialDelay
+      value: 3.923081
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 992619232}
@@ -2804,6 +2808,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+      propertyPath: betweenBeatDelay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6083321067594884050, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
