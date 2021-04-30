@@ -193,6 +193,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1468035640206613856, guid: 20900eb3e4ad29241b44fb45d8417851, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 20900eb3e4ad29241b44fb45d8417851, type: 3}
+--- !u!114 &63140062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+  m_PrefabInstance: {fileID: 1396740839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cc7a5f79c7a1640b86a958ed7ce370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &157898413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,6 +273,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -1088374664926676944, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -1088374664926676944, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1088374664926676944, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
+      propertyPath: m_LinearDrag
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: -1088374664926676944, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1088374664926676944, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
@@ -271,11 +298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 39257342001093883, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.2724
+      value: 7.3624253
       objectReference: {fileID: 0}
     - target: {fileID: 39257342001093883, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.2724
+      value: 7.455079
       objectReference: {fileID: 0}
     - target: {fileID: 39257342001093883, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_LocalScale.z
@@ -283,11 +310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 39257342001093883, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: -6.8344
       objectReference: {fileID: 0}
     - target: {fileID: 39257342001093883, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.65
+      value: 2.3031
       objectReference: {fileID: 0}
     - target: {fileID: 39257342001093883, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -523,9 +550,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9011550b90e8d44fa57d86967a8dbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 4
   manager: {fileID: 0}
   player: {fileID: 396846297}
+  speed: 0.009
 --- !u!1 &1195779432
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 6083321067088895411, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+      propertyPath: orthographic size
+      value: 8.227806
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
 --- !u!1001 &1505973865
@@ -909,7 +941,7 @@ PrefabInstance:
     - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: musicManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 63140062}
     - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: disableMovement
       value: 0
