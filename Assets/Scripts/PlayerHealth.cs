@@ -24,9 +24,10 @@ public class PlayerHealth : MonoBehaviour
             health -= 1;
         }
 
-        if (healthRegen && health < maxHealth)
+        if (healthRegen)
         {
             health += regen;
+            health = Mathf.Min(health, maxHealth);
         }
 
         if (health <= 0)
@@ -36,14 +37,14 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Reduce player health by the given quantity.
-    public void LowerHealth(int damage)
+    public void LowerHealth(float damage)
     {
         health -= damage;
         if (health < 0)
             health = 0;
     }
 
-    public void RaiseHealth(int heal)
+    public void RaiseHealth(float heal)
     {
         health += heal;
         if (health > maxHealth)

@@ -310,8 +310,8 @@ MonoBehaviour:
   outRadius: 0.8
   minDisplayMagnitude: 18
   force: 10
-  gravityIncrement: 0.025
-  forceIncrement: 1
+  percentIncrement: 0.01
+  diffInd: {fileID: 0}
 --- !u!1 &407766603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146193, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: m_GravityScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146194, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: m_RootOrder

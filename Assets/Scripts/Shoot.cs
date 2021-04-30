@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Shoot : MonoBehaviour
 {
     public MusicManager musicManager;
@@ -17,10 +17,31 @@ public class Shoot : MonoBehaviour
     public bool fourQuads = false;
     public bool ratedLaser = false;
     LineRenderer laser;
+    public float scaleOverTime = .125F;
+    public float percentInc = 1F;
+    float curPercent = 100;
+    public TextMeshPro diffInd;
+    public bool recoilOnly = false;
     float lastLaserFire = -1;
+    public LavaWall lavaWall1, lavaWall2;
+    public Spawner spawner;
+    float lavaWallSpeed;
+    float initSpawnRate;
+    public bool randTele = false;
+    public float healFromKills = 0;
+    PlayerHealth health;
     // Start is called before the first frame update
     void Start()
     {
+        health = GetComponent<PlayerHealth>();
+        if (recoilOnly)
+        {
+            lavaWallSpeed = lavaWall1.forceAmount;
+        }
+        if (randTele)
+        {
+            initSpawnRate = spawner.spawnRate;
+        }
         laser = GetComponent<LineRenderer>();
         laser.positionCount = 2;
         //nothing.
@@ -38,6 +59,25 @@ public class Shoot : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && GetComponent<Parry>().ammo > 0)
             {
                 ActionRating ar = musicManager.RateAction();
+                if (recoilOnly)
+                {
+
+                    float actionScore = (3F - ((float)ar % 4)) / 3F;
+                    actionScore += scaleOverTime;
+                    curPercent += actionScore * percentInc;
+                    diffInd.text = "Speed: " + (int)curPercent + "%";
+                    lavaWall1.forceAmount = lavaWallSpeed * curPercent / 100F;
+                    lavaWall2.forceAmount = -lavaWallSpeed * curPercent / 100F;
+
+                }
+                if (randTele)
+                {
+                    float actionScore = (3F - ((float)ar % 4)) / 3F;
+                    actionScore += scaleOverTime;
+                    curPercent += actionScore * percentInc;
+                    diffInd.text = "Spawnrate: " + (int)curPercent + "%";
+                    spawner.spawnRate = initSpawnRate * curPercent / 100F;
+                }
                 if (ar != ActionRating.INVALID)
                 {
 
@@ -62,6 +102,7 @@ public class Shoot : MonoBehaviour
                         } else
                         {
                             FireLaser();
+                           
                         }
                     }
                     else
@@ -125,6 +166,10 @@ public class Shoot : MonoBehaviour
             if (collision.collider != null && collision.collider.tag == "Enemy")
             {
                 collision.collider.gameObject.SendMessage("Damage", laserDamage);
+                if (healFromKills != 0)
+                {
+                    health.RaiseHealth(healFromKills);
+                }
             }
         }
         GetComponent<Parry>().ammo--;
