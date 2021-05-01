@@ -52,7 +52,7 @@ MonoBehaviour:
   beatReceivers:
   - {fileID: 685744261088101849, guid: ad1b56a19ac8a584d8757593b908352f, type: 3}
   - {fileID: 6443348360421146196, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
-  - {fileID: 0}
+  - {fileID: 3375811318237510061, guid: 793309b0504bb12468107581fd421bd3, type: 3}
   - {fileID: 0}
   actionBeatReceivers: []
   initialDelay: 3.923081

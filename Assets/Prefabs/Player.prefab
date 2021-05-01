@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportLeniency: 0.06
   forceAmount: 25
-  musicManager: {fileID: 0}
+  musicManager: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
   disableMovement: 0
   fourQuads: 0
   teleEnabled: 1
@@ -178,6 +178,9 @@ MonoBehaviour:
   recoilOnly: 0
   lavaWall1: {fileID: 0}
   lavaWall2: {fileID: 0}
+  spawner: {fileID: 0}
+  randTele: 0
+  healFromKills: 0
 --- !u!114 &2078303053369835432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +196,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   healthRegen: 0
+  healthDegen: 1
   regen: 0.01
+  degen: 0.1
 --- !u!120 &6443348360421146221
 LineRenderer:
   m_ObjectHideFlags: 0

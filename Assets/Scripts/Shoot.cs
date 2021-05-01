@@ -202,7 +202,7 @@ public class Shoot : MonoBehaviour
         Vector3 laserTip = bulletDirection * laserLength;
         laserTip.z = 6;
         laser.SetPositions(new Vector3[] { new Vector3(0, 0, 6), laserTip });
-        this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * 3 * bulletDirection);
+        this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * 1 * bulletDirection);
 
     }
 
@@ -227,7 +227,7 @@ public class Shoot : MonoBehaviour
         Vector3 laserTip = bulletDirection * laserLength;
         laserTip.z = 6;
         laser.SetPositions(new Vector3[] { new Vector3(0, 0, 6), laserTip });
-        this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * 5 * bulletDirection);
+        this.GetComponent<Rigidbody2D>().AddForce(-recoilForce * 3 * bulletDirection);
 
     }
 
