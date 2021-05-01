@@ -12,6 +12,7 @@ public class hoopGoal : MonoBehaviour
     {
         Color temp = GetComponent<SpriteRenderer>().color;
         GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, 0);
+        timeToSpawn = 3000;
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class hoopGoal : MonoBehaviour
             GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, 0);
             ScoreManager.score += 20;
             visible = false;
-            timeToSpawn = 120;
+            timeToSpawn = 180;
         }
     }
 
