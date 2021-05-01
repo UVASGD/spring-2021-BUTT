@@ -10,55 +10,62 @@ public class MusicManager : MonoBehaviour
     public GameObject[] beatReceivers;
     public GameObject[] actionBeatReceivers;
     [Header("Control When Beats Happen (Seconds)")]
-    public float initialDelay = 0F;  // How long before the music starts 
+    float initialDelay = 0.461539F/2F;  // How long before the music starts 
     public float betweenBeatDelay = .461538462F; // How long in between beats
     public ActionRatingController arIndicator;
     [Header("The interval difference between beats. For example, if we want 4 16th notes, put 16,16,16,16")]
     public float[] beatWaitTimes;
     public GameObject beatPredictor, beatPredictor2;
-    static float lastActionTime = 0;
-    static int currentAction = 0;
-    static float lastDisplayTime;
-    static int currentDisplayAction = 0;
+
     public GameObject cameraObject;
     //bool black = false;
     public AudioSource source;
-    public List<float> beatTimes;
+    public static List<BeatObject> beatPredictTimes = null;
+    public static List<BeatObject> oldBeatPredictTimes = null;
     public ScoreManager scoreManager;
     public float perfectScoreInc = .2F;
     static int beats = 0;
-    //bool start = false;
     int beatStart = -1;
+    static bool grandfathering = false;
+    static int curPredIndex = 0, curGrampIndex = 0;
+    //bool start = false;
     private void Start()
     {
-        //start = true;
-        beatStart = beats;
+
         source = GameObject.Find("SoundPlayer").GetComponent<AudioSource>();
-        beatTimes = new List<float>();
-        float curBeat = beats % (int)beatsPerMeasure;
-        //print("curBeat " + curBeat);
-        int i;
-        for (i = 0; ; i = (i + 1) % beatWaitTimes.Length)
+        beats = (int)(source.time / betweenBeatDelay + .5);
+        beatStart = beats;
+       if (beatPredictTimes != null)
         {
-            curBeat -= beatsPerMeasure / beatWaitTimes[i];
-            if (curBeat < 1F / 128F)
+            grandfathering = true;
+        }
+        curGrampIndex = curPredIndex;
+        float val = initialDelay;
+        curPredIndex = 0;
+        int i = 0;
+        beatPredictTimes = new List<BeatObject>();
+
+        while (val < source.clip.length)
+        {
+
+            if (val < source.time)
             {
-                break;
+                curPredIndex++;
             }
-           
+            beatPredictTimes.Add(new BeatObject(val, i));
+            val += (4.0F / beatWaitTimes[i]) * betweenBeatDelay;//1 quarter note is 1 beat
+            i = (i + 1) % beatWaitTimes.Length;
         }
-        currentAction = i;
-        currentDisplayAction = i;
-        //print("Therefore " + i);
-        if (lastActionTime == 0)
+
+        if (!grandfathering)
         {
-            lastActionTime = lastDisplayTime = initialDelay;
+            oldBeatPredictTimes = beatPredictTimes;
+
         }
-       
+
 
     }
-    static int curReps;
-    bool beatAnimed = false;
+   // bool beatAnimed = false;
     public float beatLTime = 0;
 
     //static float startTime = 0;
@@ -66,35 +73,101 @@ public class MusicManager : MonoBehaviour
     float getSourceTime()
     {
         float sTime = source.time;
+
+        print("AWERF" + sTime + "  " + lastSTime);
         if (sTime < lastSTime - 1) //restarted song
         {
-            curReps++;
+            beats = 0;
+            curPredIndex = 0;
+            curGrampIndex = 0;
+            foreach (BeatObject b in beatPredictTimes)
+            {
+                b.acted = false;
+                b.animed = false;
+            }
+            foreach (BeatObject b in oldBeatPredictTimes)
+            {
+                b.acted = false;
+                b.animed = false;
+            }
         }
         lastSTime = sTime;
-        return curReps*source.clip.length + sTime;
+        return sTime;
     }
     private void Update()
     {
+        int lastBeats = beats;
+        beats = (int)(source.time / betweenBeatDelay + .5);
+        if (beats>lastBeats)
+        {
+            
+            foreach (GameObject receiver in beatReceivers)
+            {
+                try
+                {
+                    // print("Outer OnBeat "+beats);
+                    receiver.SendMessage("OnBeat", beats);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
 
+        }
         float sourceTime = getSourceTime();
         //print("STIME " + sourceTime);
-        if (beatTimes.Count > 0 && Mathf.Abs(sourceTime - beatTimes[0]) > beatsPerMeasure * betweenBeatDelay)
-        {
-            beatTimes.RemoveAt(0);
-        }
+      
         float curSongTime = sourceTime;
-        while (curSongTime - lastDisplayTime + beatsPerMeasure * betweenBeatDelay >= (1.0/beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure)
+        if (grandfathering && beats % 4 == 1 && beats - beatStart > beatsPerMeasure)
         {
-            beatTimes.Add((1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure + lastDisplayTime);
+            grandfathering = false;            
+            oldBeatPredictTimes = beatPredictTimes;
+        }
+        if (grandfathering)
+        {
+            if (curSongTime > oldBeatPredictTimes[curGrampIndex].time) // percentage of a measure for this beat times the length of a measure assuming 4/4
+            {
+
+
+                Instantiate(beatPredictor, cameraObject.transform);
+                Instantiate(beatPredictor2, cameraObject.transform);
+                print("Grandpa Beat " + beats);
+                //beatAnimed = false;
+                foreach (GameObject receiver in actionBeatReceivers)
+                {
+                    try
+                    {
+                        receiver.SendMessage("OnActionBeat", beats);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                }
+                curGrampIndex += 1;
+                curGrampIndex %= oldBeatPredictTimes.Count;
+            }
+            if (!oldBeatPredictTimes[curGrampIndex].animed && curSongTime + beatLTime > oldBeatPredictTimes[curGrampIndex].time)
+            {
+                oldBeatPredictTimes[curGrampIndex].animed = true;
+                IndicatorOnBeat();
+            }
+        }
+        else
+        {
+           
+            if (!beatPredictTimes[curPredIndex].animed && curSongTime + beatLTime > beatPredictTimes[curPredIndex].time)
+            {
+                beatPredictTimes[curPredIndex].animed = true;
+                IndicatorOnBeat();
+            }
+        }
+        if (curSongTime > beatPredictTimes[curPredIndex].time) // percentage of a measure for this beat times the length of a measure assuming 4/4
+        {
             Instantiate(beatPredictor, cameraObject.transform);
             Instantiate(beatPredictor2, cameraObject.transform);
-            lastDisplayTime += (1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure;
-            currentDisplayAction = (currentDisplayAction + 1) % beatWaitTimes.Length;
-
-        }
-        if (curSongTime - lastActionTime > (1.0/beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure) // percentage of a measure for this beat times the length of a measure assuming 4/4
-        {
-            beatAnimed = false;
+            print("Beat " + beats);
             foreach (GameObject receiver in actionBeatReceivers)
             {
                 try
@@ -106,38 +179,13 @@ public class MusicManager : MonoBehaviour
                     Console.WriteLine(e.ToString());
                 }
             }
-            lastActionTime += (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure;
-            currentAction = (currentAction + 1) % beatWaitTimes.Length;
-        } 
-        if (! beatAnimed && curSongTime - lastActionTime + beatLTime > (1.0 / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure)
-        {
-            beatAnimed = true;
-            IndicatorOnBeat();
+            curPredIndex += 1;
+            curPredIndex %= beatPredictTimes.Count;
+
         }
 
-        
-        if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
-        {
-            if ((beats - beatStart) >= beatsPerMeasure)
-            {
-                foreach (GameObject receiver in beatReceivers)
-                {
-                    try
-                    {
-                       // print("Outer OnBeat "+beats);
-                        receiver.SendMessage("OnBeat", beats);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.ToString());
-                    }
-                }
-            } else
-            {
-               // print("Skip!");
-            }
-            beats++;
-        }
+
+
     }
     void IndicatorOnBeat()
     {
@@ -145,42 +193,53 @@ public class MusicManager : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("Beat");
         }
-
-//        GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(0, 0, 0);
-//        black = !black;
     }
     /**
      * Gives a number indicating how far we are from a beat. If we are closer to the last beat than the next one, returns the time since the last beat. Otherwise returns -1 * the time to the next beat
      */
-    float TimeSinceLastBeat()
-    {
-        float timeSinceLastBeat = getSourceTime() - lastActionTime;
-        float timeToNextBeat = (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure + lastActionTime - getSourceTime();
-        return timeSinceLastBeat < timeToNextBeat ? timeSinceLastBeat : -timeToNextBeat;
-       
 
-    }
     int an = 0;
     public ActionRating RateAction()
     {
+        if (beats < beatsPerMeasure * 2 || source.time > source.clip.length - betweenBeatDelay * 8)
+        {
+            arIndicator.ShowActionRating(ActionRating.PERFECT);
+            return ActionRating.PERFECT;
+        }
         an++;
         float curTime = getSourceTime();
-        int bestI = -1;
+        BeatObject bestI = null;
         float bestScore = 1000000000F;
-        for (int i = 0; i < beatTimes.Count; i++) {
-            if (Mathf.Abs(curTime - beatTimes[i]) < bestScore)
+        if (grandfathering)
+        {
+            for (int i = 0; i < oldBeatPredictTimes.Count; i++)
             {
-                bestI = i;
-                bestScore = Mathf.Abs(curTime - beatTimes[i]);
-            } 
+                if (!oldBeatPredictTimes[i].acted && Mathf.Abs(curTime - oldBeatPredictTimes[i].time) < bestScore)
+                {
+                    bestI = oldBeatPredictTimes[i];
+                    bestScore = Mathf.Abs(curTime - oldBeatPredictTimes[i].time);
+                }
+
+            }
+        }
+        else
+        {
+            for (int i = 0; i < beatPredictTimes.Count; i++)
+            {
+                if (!beatPredictTimes[i].acted && Mathf.Abs(curTime - beatPredictTimes[i].time) < bestScore)
+                {
+                    bestI = beatPredictTimes[i];
+                    bestScore = Mathf.Abs(curTime - beatPredictTimes[i].time);
+                }
+            }
         }
         ActionRating ar;
-        if (bestI == -1 || bestScore > okWindowLength)
+        if (bestI == null || bestScore > okWindowLength)
         {
             arIndicator.ShowActionRating(ActionRating.BAD);
             return ActionRating.INVALID;
         }
-        beatTimes.RemoveAt(bestI);
+        bestI.acted = true;
         float timeToNextBeat = bestScore;
         if (timeToNextBeat <= perfectWindowLength)
         { 
@@ -206,6 +265,20 @@ public class MusicManager : MonoBehaviour
     }
 
 } 
+
+public class BeatObject
+{
+    public bool acted;
+    public bool animed;
+    public float time;
+    public int actionIndex;
+    public BeatObject(float time, int actionIndex)
+    {
+        acted = animed = false;
+        this.time = time;
+        this.actionIndex = actionIndex;
+    }
+}
 public enum ActionRating
 {
     BAD, OK, GOOD, PERFECT, INVALID

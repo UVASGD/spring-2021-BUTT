@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class Shoot : MonoBehaviour
 {
     public MusicManager musicManager;
@@ -20,8 +22,10 @@ public class Shoot : MonoBehaviour
     public float scaleOverTime = .125F;
     public float percentInc = 1F;
     public static float curTelePercent = 100;
+    public static float curQuadPercent = 100;
     public static float curRecPercent = 100;
     public static float curRacePercent = 100;
+    public GameObject fL;
     public wallAnimator wall_anima;
     public bool race = false;
     public TextMeshPro diffInd;
@@ -44,7 +48,7 @@ public class Shoot : MonoBehaviour
         {
             lavaWallSpeed = lavaWall1.forceAmount;
         }
-        if (randTele)
+        if (randTele || fourQuads)
         {
             initSpawnRate = spawner.spawnRate;
         }
@@ -56,7 +60,15 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shootEnabled)
+        if (race)
+        {
+            print(transform.position.x + " " + fL.transform.position.x);
+            if (transform.position.x > fL.transform.position.x)
+            {
+                SceneManager.LoadScene("opening_screen");
+            }
+        }
+            if (shootEnabled)
         {
             if (lastLaserFire != -1 && Time.time - lastLaserFire > laserDuration)
             {
@@ -72,6 +84,8 @@ public class Shoot : MonoBehaviour
                     actionScore += scaleOverTime;
                     curRecPercent += actionScore * percentInc;
                     diffInd.text = "Speed: " + (int)curRecPercent + "%";
+
+
                     lavaWall1.forceAmount = lavaWallSpeed * curRecPercent / 100F;
                     lavaWall2.forceAmount = -lavaWallSpeed * curRecPercent / 100F;
 
@@ -84,6 +98,14 @@ public class Shoot : MonoBehaviour
                     diffInd.text = "Rate: " + (int)curTelePercent + "%";
                     spawner.spawnRate = initSpawnRate * curTelePercent / 100F;
                 }
+                if (fourQuads)
+                {
+                    float actionScore = (3F - ((float)ar % 4)) / 3F;
+                    actionScore += scaleOverTime;
+                    curQuadPercent += actionScore * percentInc;
+                    diffInd.text = "Rate: " + (int)curQuadPercent + "%";
+                    spawner.spawnRate = initSpawnRate * curTelePercent / 100F;
+                }
                 if(race)
                 {
                     if(curRacePercent < MAX_PERCENT) {
@@ -91,10 +113,9 @@ public class Shoot : MonoBehaviour
                         actionScore += scaleOverTime;
                         curRacePercent += actionScore * percentInc;
                         diffInd.text = "Speed: " + (int)curRacePercent + "%";
-                        wall.speed = curRacePercent / 100F;
+                        wall_anima.speed = curRacePercent / 100F;
                     }
-                    
-                    
+
                 }
                 if (ar != ActionRating.INVALID)
                 {

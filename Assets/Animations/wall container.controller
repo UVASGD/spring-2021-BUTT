@@ -81,4 +81,4 @@ AnimatorState:
   m_SpeedParameter: speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: New Float

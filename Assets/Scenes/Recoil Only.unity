@@ -369,6 +369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LavaWall
       objectReference: {fileID: 0}
+    - target: {fileID: 4496837195746191356, guid: b6ec8461fce99fd4184db81d2e0a77f2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4496837195746191357, guid: b6ec8461fce99fd4184db81d2e0a77f2, type: 3}
       propertyPath: goal
       value: 
@@ -556,6 +560,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 870533222774347989, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 870533222774347991, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -666,6 +674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
+      propertyPath: beatLTime
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: initialDelay
       value: 3.923081

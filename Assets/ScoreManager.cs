@@ -9,8 +9,8 @@ public class ScoreManager : MonoBehaviour
 {
     static string curScene = "Recoil Only";
     static int numSwitches = 1;
-    string[] scenes = new string[] { "TeleportOnly", "Recoil Only", "FourQuads",   "Hackeysack"};
-
+    string[] scenes = new string[] { "TeleportOnly","Recoil Only", "Hackeysack", "FourQuadsCopy"   };
+    public bool justWin;
     bool isGauntlet;
     float neededScore = 100;
     public static float score = 0;
@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startingScore = score;
+        startingScore = score - (score % neededScore);
         bar = GetComponent<Image>();
         isGauntlet = ButtonScript.isGauntlet;  
         if (!isGauntlet)
@@ -33,7 +33,12 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGauntlet)
+        if (justWin)
+        {
+            score += 30;
+            justWin = false;
+        }
+        if (ButtonScript.isGauntlet)
         {
             bar.fillAmount = (ScoreManager.score % neededScore) / neededScore;
             if (ScoreManager.score - startingScore >= neededScore)
@@ -51,7 +56,9 @@ public class ScoreManager : MonoBehaviour
                     sceneToGo = ButtonScript.tutorialNames[sceneToGo];
                 }
                 SceneManager.LoadScene(sceneToGo);
-                SceneManager.UnloadSceneAsync(oldScene);
+                LiveOnLoad.name = sceneToGo;
+                //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToGo));
+                //SceneManager.UnloadSceneAsync(oldScene);
             }
         }
 

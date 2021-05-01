@@ -45,11 +45,13 @@ public class finnsihLine : MonoBehaviour
 
         
     }
+
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "Player")
         {
             //player.SendMessage("Damage", damage);
+            ScoreManager.score += 100;
             Destroy(this.gameObject);
         }
     }

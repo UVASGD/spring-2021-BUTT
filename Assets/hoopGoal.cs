@@ -35,7 +35,7 @@ public class hoopGoal : MonoBehaviour
         {
             Color temp = GetComponent<SpriteRenderer>().color;
             GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, 0);
-            ScoreManager.score += 20;
+            ScoreManager.score += 5;
             visible = false;
             timeToSpawn = 180;
         }
