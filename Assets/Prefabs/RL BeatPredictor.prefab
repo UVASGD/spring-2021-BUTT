@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9057644062290972180}
   - component: {fileID: 8322364299634278678}
   - component: {fileID: 8291884415570070219}
-  - component: {fileID: 3192566179825961089}
   m_Layer: 0
   m_Name: RL BeatPredictor
   m_TagString: Untagged
@@ -103,15 +102,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3192566179825961089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6758771040053262587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664a778e1af60c54dae5a68ea0ca918a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

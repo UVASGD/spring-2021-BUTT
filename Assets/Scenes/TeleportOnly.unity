@@ -375,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: perfectScoreInc
-      value: 10
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: beatWaitTimes.Array.size
@@ -489,7 +489,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2078303053369835432, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: regen
-      value: -0.005
+      value: -0.0025
       objectReference: {fileID: 0}
     - target: {fileID: 2078303053369835432, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: healthRegen
@@ -589,7 +589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: percentInc
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: recoilForce

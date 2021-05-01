@@ -12,7 +12,7 @@ public class ButtonScript : MonoBehaviour
     public GameObject container1, container2;
     public static Dictionary<string, string> tutorialNames = new Dictionary<string,string>
     { 
-        { "RecoilOnly", "tutorial_rock" },
+        { "Recoil Only", "tutorial_rock" },
         { "TeleportOnly", "tutorial_jump" }, 
         { "FourQuadsCopy", "tutorial_quad" },
         { "Hackeysack", "tutorial_airball" }
@@ -149,7 +149,11 @@ public class ButtonScript : MonoBehaviour
     public void FirstLevel()
     {
         string sceneToGo = firstLevelScene;
-        isGauntlet = container1.activeSelf;
+        if (!SceneManager.GetActiveScene().name.Contains("tutorial"))
+        {
+            isGauntlet = container1.activeSelf;
+        }
+        print("ISG " + isGauntlet);
         if (!SceneManager.GetActiveScene().name.Contains("tutorial") && tutorial)
         {
             sceneToGo = tutorialNames[sceneToGo];

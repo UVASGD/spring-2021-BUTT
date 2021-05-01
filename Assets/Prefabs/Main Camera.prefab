@@ -373,7 +373,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   actionBeatReceivers: []
-  initialDelay: 3.923081
+  initialDelay: 0.230769
   betweenBeatDelay: 0.461539
   arIndicator: {fileID: 6083321067821495912}
   beatWaitTimes:
@@ -387,7 +387,6 @@ MonoBehaviour:
   beatPredictor2: {fileID: 6758771040053262587, guid: 6fde376fb4b13f74bb5a507af2a40b5d, type: 3}
   cameraObject: {fileID: 6083321067088895421}
   source: {fileID: 0}
-  beatTimes: []
   scoreManager: {fileID: 6083321067758957716}
   perfectScoreInc: 0.2
   beatLTime: 0.06

@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     public GameObject[] beatReceivers;
     public GameObject[] actionBeatReceivers;
     [Header("Control When Beats Happen (Seconds)")]
-    public float initialDelay = 0F;  // How long before the music starts 
+    float initialDelay = 0.461539F/2F;  // How long before the music starts 
     public float betweenBeatDelay = .461538462F; // How long in between beats
     public ActionRatingController arIndicator;
     [Header("The interval difference between beats. For example, if we want 4 16th notes, put 16,16,16,16")]
@@ -73,6 +73,8 @@ public class MusicManager : MonoBehaviour
     float getSourceTime()
     {
         float sTime = source.time;
+
+        print("AWERF" + sTime + "  " + lastSTime);
         if (sTime < lastSTime - 1) //restarted song
         {
             beats = 0;
@@ -98,21 +100,20 @@ public class MusicManager : MonoBehaviour
         beats = (int)(source.time / betweenBeatDelay + .5);
         if (beats>lastBeats)
         {
-            if ((beats - beatStart) >= beatsPerMeasure)
+            
+            foreach (GameObject receiver in beatReceivers)
             {
-                foreach (GameObject receiver in beatReceivers)
+                try
                 {
-                    try
-                    {
-                        // print("Outer OnBeat "+beats);
-                        receiver.SendMessage("OnBeat", beats);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.ToString());
-                    }
+                    // print("Outer OnBeat "+beats);
+                    receiver.SendMessage("OnBeat", beats);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
                 }
             }
+
         }
         float sourceTime = getSourceTime();
         //print("STIME " + sourceTime);
@@ -145,6 +146,7 @@ public class MusicManager : MonoBehaviour
                     }
                 }
                 curGrampIndex += 1;
+                curGrampIndex %= oldBeatPredictTimes.Count;
             }
             if (!oldBeatPredictTimes[curGrampIndex].animed && curSongTime + beatLTime > oldBeatPredictTimes[curGrampIndex].time)
             {
@@ -178,6 +180,7 @@ public class MusicManager : MonoBehaviour
                 }
             }
             curPredIndex += 1;
+            curPredIndex %= beatPredictTimes.Count;
 
         }
 
@@ -198,6 +201,11 @@ public class MusicManager : MonoBehaviour
     int an = 0;
     public ActionRating RateAction()
     {
+        if (beats < beatsPerMeasure * 2 || source.time > source.clip.length - betweenBeatDelay * 8)
+        {
+            arIndicator.ShowActionRating(ActionRating.PERFECT);
+            return ActionRating.PERFECT;
+        }
         an++;
         float curTime = getSourceTime();
         BeatObject bestI = null;

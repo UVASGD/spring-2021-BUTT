@@ -3114,6 +3114,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 197914226}
     - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
+      propertyPath: initialDelay
+      value: 0.2307695
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 992619232}
@@ -5170,6 +5174,10 @@ PrefabInstance:
     - target: {fileID: 4384525986001936969, guid: a18bf3e13c0d8e04498be18c54fdfeb8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6723901253347033618, guid: a18bf3e13c0d8e04498be18c54fdfeb8, type: 3}
+      propertyPath: boomerPilled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18bf3e13c0d8e04498be18c54fdfeb8, type: 3}
