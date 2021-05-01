@@ -545,6 +545,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4496837195746191356, guid: b6ec8461fce99fd4184db81d2e0a77f2, type: 3}
     - target: {fileID: 870533222774347988, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
+      propertyPath: killScoreInc
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 870533222774347988, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1521100911}
@@ -668,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: perfectScoreInc
-      value: 30
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6083321066860903452, guid: 543fb6d25577f5e4aa05f04824a17804, type: 3}
       propertyPath: betweenBeatDelay

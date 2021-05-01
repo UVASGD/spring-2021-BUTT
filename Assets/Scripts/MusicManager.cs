@@ -15,7 +15,7 @@ public class MusicManager : MonoBehaviour
     public ActionRatingController arIndicator;
     [Header("The interval difference between beats. For example, if we want 4 16th notes, put 16,16,16,16")]
     public float[] beatWaitTimes;
-    public GameObject beatPredictor;
+    public GameObject beatPredictor, beatPredictor2;
     static float lastActionTime = 0;
     static int currentAction = 0;
     static float lastDisplayTime;
@@ -58,6 +58,9 @@ public class MusicManager : MonoBehaviour
 
     }
     static int curReps;
+    bool beatAnimed = false;
+    public float beatLTime = 0;
+
     //static float startTime = 0;
     static float lastSTime = -1;
     float getSourceTime()
@@ -84,13 +87,14 @@ public class MusicManager : MonoBehaviour
         {
             beatTimes.Add((1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure + lastDisplayTime);
             Instantiate(beatPredictor, cameraObject.transform);
+            Instantiate(beatPredictor2, cameraObject.transform);
             lastDisplayTime += (1.0F / beatWaitTimes[currentDisplayAction]) * betweenBeatDelay * beatsPerMeasure;
             currentDisplayAction = (currentDisplayAction + 1) % beatWaitTimes.Length;
 
         }
         if (curSongTime - lastActionTime > (1.0/beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure) // percentage of a measure for this beat times the length of a measure assuming 4/4
         {
-
+            beatAnimed = false;
             foreach (GameObject receiver in actionBeatReceivers)
             {
                 try
@@ -104,8 +108,14 @@ public class MusicManager : MonoBehaviour
             }
             lastActionTime += (1.0F / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure;
             currentAction = (currentAction + 1) % beatWaitTimes.Length;
+        } 
+        if (! beatAnimed && curSongTime - lastActionTime + beatLTime > (1.0 / beatWaitTimes[currentAction]) * betweenBeatDelay * beatsPerMeasure)
+        {
+            beatAnimed = true;
             IndicatorOnBeat();
         }
+
+        
         if (curSongTime - initialDelay - beats * betweenBeatDelay >= 0)
         {
             if ((beats - beatStart) >= beatsPerMeasure)

@@ -384,11 +384,13 @@ MonoBehaviour:
   - 12
   - 4
   beatPredictor: {fileID: 3375811318237510061, guid: 793309b0504bb12468107581fd421bd3, type: 3}
+  beatPredictor2: {fileID: 6758771040053262587, guid: 6fde376fb4b13f74bb5a507af2a40b5d, type: 3}
   cameraObject: {fileID: 6083321067088895421}
   source: {fileID: 0}
   beatTimes: []
   scoreManager: {fileID: 6083321067758957716}
   perfectScoreInc: 0.2
+  beatLTime: 0.4
 --- !u!212 &6083321067594884051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -426,8 +428,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1167194767
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66ac4d1e71d78a94783e0b5439ee7399, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
