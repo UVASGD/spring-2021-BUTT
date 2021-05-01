@@ -29,16 +29,12 @@ public class wall_AI : MonoBehaviour
             GameObject newWall;
 
             Vector3 startPos;
-             int x = Random.Range(0, 4);
-             if (x == 0)
-                 startPos = new Vector3(-13.4F, 2.5F, 7);
-             else if (x == 1)
-                 startPos = new Vector3(13.4F, 2.5F, 7);
-             else if (x == 2)
-                 startPos = new Vector3(-13.4F, -1.5F, 7);
-             else
-                 startPos = new Vector3(13.4F, -1.5F, 7);
-            newWall = (GameObject)Instantiate(wallPrefab, startPos, this.gameObject.transform.rotation);
+            
+            float rotation = Random.value * Mathf.PI * 2;
+            Vector3 positionFromPlayer = spawnDistance * Vector3.right;
+            spawnDistance += 10;
+            newWall = (GameObject)Instantiate(wallPrefab, player.transform.position + positionFromPlayer, this.gameObject.transform.rotation);
+          //  newWall = (GameObject)Instantiate(wallPrefab, startPos, this.gameObject.transform.rotation);
 
            // Wall_moves newAI = newWall.GetComponent<Wall_moves>();
             int minIndex = -1;
