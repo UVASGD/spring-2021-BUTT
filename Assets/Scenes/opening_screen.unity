@@ -4041,7 +4041,7 @@ MonoBehaviour:
   beatsToSwitch: 8
   container1: {fileID: 360688508}
   container2: {fileID: 479620379}
-  firstLevelScene: FourQuads
+  firstLevelScene: FourQuadsCopy
   timeInd: {fileID: 167856687}
   loadFirstLevel: 1
   beatCounter: 1
