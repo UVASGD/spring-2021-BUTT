@@ -36,7 +36,7 @@ public class MusicManager : MonoBehaviour
         source = GameObject.Find("SoundPlayer").GetComponent<AudioSource>();
         beatTimes = new List<float>();
         float curBeat = beats % (int)beatsPerMeasure;
-        print("curBeat " + curBeat);
+        //print("curBeat " + curBeat);
         int i;
         for (i = 0; ; i = (i + 1) % beatWaitTimes.Length)
         {
@@ -49,7 +49,7 @@ public class MusicManager : MonoBehaviour
         }
         currentAction = i;
         currentDisplayAction = i;
-        print("Therefore " + i);
+        //print("Therefore " + i);
         if (lastActionTime == 0)
         {
             lastActionTime = lastDisplayTime = initialDelay;
@@ -124,7 +124,7 @@ public class MusicManager : MonoBehaviour
                 {
                     try
                     {
-                        print("Outer OnBeat "+beats);
+                       // print("Outer OnBeat "+beats);
                         receiver.SendMessage("OnBeat", beats);
                     }
                     catch (Exception e)
@@ -134,7 +134,7 @@ public class MusicManager : MonoBehaviour
                 }
             } else
             {
-                print("Skip!");
+               // print("Skip!");
             }
             beats++;
         }
