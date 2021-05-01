@@ -14,8 +14,8 @@ public class enemy_dos : MonoBehaviour
     public float bulletSpeed = 50;
     public float laserLength = 200;
     public int laserDamage = 1;
-    public float shootOnBeatLeniency = .06F;
-    public float laserDuration = .1F;
+   // public float shootOnBeatLeniency = .06F;
+   /// public float laserDuration = .1F;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +38,10 @@ public class enemy_dos : MonoBehaviour
     public void OnBeat(int beatNum)
     {
         
-        if (beatNum % 4 == 0)
+        if (beatNum % 2 == 0)
         {
             laserFire = true;
+            FireLaser();
         }
         else
         {

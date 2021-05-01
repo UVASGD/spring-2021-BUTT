@@ -5,72 +5,64 @@ using UnityEngine;
 public class wall_AI : MonoBehaviour
 {
 
-    public GameObject wallPrefab, player;
+    public GameObject wallPrefab, player, finnishLine;
     public int maxWalls = 10;
     public float spawnRate = .25F;
-    public float spawnDistance = 10;
+    public float spawnDistance = 20f;
+    private Vector3 currentPlayerX;
+    private float checkpoint = 20f;
     public List<GameObject> goals = new List<GameObject>();
 
     List<GameObject> spawnedWalls = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        float tempSpawnRate = spawnRate;
-        tempSpawnRate -= Random.value;
-        while (spawnedWalls.Count < maxWalls && tempSpawnRate > 0)
+        currentPlayerX = player.transform.position;
+
+        //if (player.transform.position.x > checkpoint)
+        //{
+        print("line a " + player.transform.position.x + " " + checkpoint);
+        print("line b " + spawnDistance + " " + maxWalls);
+
+        if (spawnedWalls.Count < maxWalls && player.transform.position.x > checkpoint)
         {
-            tempSpawnRate -= Random.value;
+            checkpoint += 10f;
+            spawnDistance += 10f;
+
             GameObject newWall;
 
             Vector3 startPos;
-            
-            float rotation = Random.value * Mathf.PI * 2;
-            Vector3 positionFromPlayer = spawnDistance * Vector3.right;
-            spawnDistance += 10;
-            newWall = (GameObject)Instantiate(wallPrefab, player.transform.position + positionFromPlayer, this.gameObject.transform.rotation);
-          //  newWall = (GameObject)Instantiate(wallPrefab, startPos, this.gameObject.transform.rotation);
 
-           // Wall_moves newAI = newWall.GetComponent<Wall_moves>();
-            int minIndex = -1;
-            float dist = float.MaxValue;
-            for (int i = 0; i < goals.Count; i++)
-            {
-                float temp = Vector3.Distance(goals[i].transform.position, newWall.transform.position);
-                if (temp < dist)
-                {
-                    dist = temp;
-                    minIndex = i;
-                }
-            }
-           // if (minIndex == -1)
-            //{
-            //    newAI.Setup(player, null, this.gameObject);
-           // }
-           // else
-          //  {
-         //       newAI.Setup(player, goals[minIndex], this.gameObject);
-          //  }
+            
+            Vector3 positionFromPlayer = spawnDistance * Vector3.right;
+            // spawnDistance += 10;
+            newWall = (GameObject)Instantiate(wallPrefab, positionFromPlayer, this.gameObject.transform.rotation);
+            //  newWall = (GameObject)Instantiate(wallPrefab, startPos, this.gameObject.transform.rotation);
+
             spawnedWalls.Add(newWall);
         }
         for (int i = 0; i < spawnedWalls.Count; i++)
         {
             if (spawnedWalls[i] != null)
             {
-               // spawnedWalls[i].SendMessage("OnBeat", beat);
+                // spawnedWalls[i].SendMessage("OnBeat", beat);
             }
             else
             {
-               // ScoreManager.score += killScoreInc;
+                // ScoreManager.score += killScoreInc;
                 spawnedWalls.RemoveAt(i);
+                print("removes the wall");
                 i--;
             }
 
         }
+        //}
+
     }
 }

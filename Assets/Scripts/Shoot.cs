@@ -19,8 +19,8 @@ public class Shoot : MonoBehaviour
     LineRenderer laser;
     public float scaleOverTime = .125F;
     public float percentInc = 1F;
-    static float curTelePercent = 100;
-    static float curRecPercent = 100;
+    public static float curTelePercent = 100;
+    public static float curRecPercent = 100;
     public TextMeshPro diffInd;
     public bool recoilOnly = false;
     float lastLaserFire = -1;

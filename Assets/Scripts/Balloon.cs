@@ -13,7 +13,7 @@ public class Balloon : MonoBehaviour
     public float inRadius = .42F, outRadius = .8F;
     public float minDisplayMagnitude= .25F;
     public float force = 500;
-    static float curPercent = 100;
+    public static float curPercent = 100;
     public float percentIncrement = .01F;
     float origForce, origGrav;
     float scaleOverTime = .125F;
