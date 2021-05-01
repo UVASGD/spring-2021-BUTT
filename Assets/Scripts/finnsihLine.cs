@@ -23,6 +23,7 @@ public class finnsihLine : MonoBehaviour
         {
             moveAway();
         }
+        
     }
 
     void moveAway()
@@ -44,13 +45,15 @@ public class finnsihLine : MonoBehaviour
 
         
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
+
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        print("AWEfawfa");
-        if (other.gameObject.tag == "Player")
+        if (coll.gameObject.tag == "Player")
         {
+            //player.SendMessage("Damage", damage);
             ScoreManager.score += 100;
+            Destroy(this.gameObject);
         }
     }
+
 }

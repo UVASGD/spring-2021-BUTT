@@ -38,6 +38,7 @@ public class Shoot : MonoBehaviour
     float initSpawnRate;
     public bool randTele = false;
     public float healFromKills = 0;
+    private const float MAX_PERCENT = 1000f;
     PlayerHealth health;
     // Start is called before the first frame update
     void Start()
@@ -107,12 +108,14 @@ public class Shoot : MonoBehaviour
                 }
                 if(race)
                 {
-                    
-                    float actionScore = (3F - ((float)ar % 4)) / 3F;
-                    actionScore += scaleOverTime;
-                    curRacePercent += actionScore * percentInc;
-                    diffInd.text = "Speed: " + (int)curRacePercent + "%";
-                    wall_anima.speed = curRacePercent / 100F;
+                    if(curRacePercent < MAX_PERCENT) {
+                        float actionScore = (3F - ((float)ar % 4)) / 3F;
+                        actionScore += scaleOverTime;
+                        curRacePercent += actionScore * percentInc;
+                        diffInd.text = "Speed: " + (int)curRacePercent + "%";
+                        wall_anima.speed = curRacePercent / 100F;
+                    }
+
                 }
                 if (ar != ActionRating.INVALID)
                 {
