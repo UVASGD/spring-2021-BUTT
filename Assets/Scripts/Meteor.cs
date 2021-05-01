@@ -84,7 +84,7 @@ public class Meteor : MonoBehaviour
             {
                 playerInside.SendMessage("Damage", damage);
             }
-            Delete();
+            GetComponent<Animator>().SetTrigger("Penis");
         }
     }
 

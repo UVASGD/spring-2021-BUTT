@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4894740567018268177}
   - component: {fileID: 4894740567018268179}
   - component: {fileID: 4894740567018268178}
+  - component: {fileID: 2896581400807168626}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -116,3 +117,22 @@ MonoBehaviour:
   manager: {fileID: 0}
   beatsToDrop: 4
   progressiveOpacity: 0
+--- !u!95 &2896581400807168626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894740567018268398}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a109a94d725811a4e8a01200ec3e6936, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
