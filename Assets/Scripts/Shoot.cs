@@ -67,6 +67,8 @@ public class Shoot : MonoBehaviour
                     actionScore += scaleOverTime;
                     curRecPercent += actionScore * percentInc;
                     diffInd.text = "Speed: " + (int)curRecPercent + "%";
+
+
                     lavaWall1.forceAmount = lavaWallSpeed * curRecPercent / 100F;
                     lavaWall2.forceAmount = -lavaWallSpeed * curRecPercent / 100F;
 
