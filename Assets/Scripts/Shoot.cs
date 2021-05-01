@@ -104,7 +104,7 @@ public class Shoot : MonoBehaviour
                     actionScore += scaleOverTime;
                     curQuadPercent += actionScore * percentInc;
                     diffInd.text = "Rate: " + (int)curQuadPercent + "%";
-                    spawner.spawnRate = initSpawnRate * curTelePercent / 100F;
+                    spawner.spawnRate = initSpawnRate * curQuadPercent / 100F;
                 }
                 if(race)
                 {

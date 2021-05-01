@@ -11,6 +11,8 @@ public class reset : MonoBehaviour
         Balloon.curPercent = 100;
         Shoot.curRecPercent = 100;
         Shoot.curTelePercent = 100;
+        Shoot.curQuadPercent = 100;
+        Shoot.curRacePercent = 100;
     }
 
     // Update is called once per frame
@@ -23,5 +25,7 @@ public class reset : MonoBehaviour
         Balloon.curPercent = 100;
         Shoot.curRecPercent = 100;
         Shoot.curTelePercent = 100;
+        Shoot.curQuadPercent = 100;
+        Shoot.curRacePercent = 100;
     }
 }
