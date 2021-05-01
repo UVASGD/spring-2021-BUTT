@@ -157,11 +157,15 @@ public class ButtonScript : MonoBehaviour
         ChangeScene(sceneToGo);
 
     }
-
     public void ChangeScene(string sceneName)
     {
         string oldScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
-        SceneManager.UnloadSceneAsync(oldScene);
+        LiveOnLoad.name = sceneName;
+
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        print("SceneName "+ sceneName);
+        print("oldScene " + oldScene);
+        //SceneManager.UnloadSceneAsync(oldScene);
     }
 }

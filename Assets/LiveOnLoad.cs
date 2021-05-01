@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LiveOnLoad : MonoBehaviour
 {
-
+    public static string name;
     private static LiveOnLoad instance = null;
     public static LiveOnLoad Instance
     {
@@ -11,6 +12,7 @@ public class LiveOnLoad : MonoBehaviour
     }
     void Awake()
     {
+
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
@@ -23,5 +25,20 @@ public class LiveOnLoad : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
     // any other methods you need
+    private void Update()
+    {
 
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            if (SceneManager.GetSceneAt(i).name != SceneManager.GetActiveScene().name)
+            {
+                print("DROPPING" + SceneManager.GetSceneAt(i).name);
+
+                SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
+            }
+        }
+
+        name = SceneManager.GetActiveScene().name;
+    }
 }
+    

@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     static string curScene = "Recoil Only";
     static int numSwitches = 1;
-    string[] scenes = new string[] { "TeleportOnly", "Recoil Only", "FourQuads",   "Hackeysack"};
+    string[] scenes = new string[] { "TeleportOnly","Recoil Only", "Hackeysack", "FourQuadsCopy"   };
 
     bool isGauntlet;
     float neededScore = 100;
@@ -51,7 +51,9 @@ public class ScoreManager : MonoBehaviour
                     sceneToGo = ButtonScript.tutorialNames[sceneToGo];
                 }
                 SceneManager.LoadScene(sceneToGo);
-                SceneManager.UnloadSceneAsync(oldScene);
+                LiveOnLoad.name = sceneToGo;
+                //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToGo));
+                //SceneManager.UnloadSceneAsync(oldScene);
             }
         }
 
