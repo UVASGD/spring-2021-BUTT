@@ -21,11 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/TeleportOnly.unity
     guid: 33d2197c7e245344881f4fdb27ad77ca
   - enabled: 1
+    path: Assets/Scenes/FourQuadsCopy.unity
+    guid: e8f7705afe4cee943a3e29d5be8fac02
+  - enabled: 1
     path: Assets/Scenes/Hackeysack.unity
     guid: 4df3798912ab451448c17ebde1f51f19
-  - enabled: 0
-    path: Assets/Scenes/fourQuads.unity
-    guid: ea5dd846ebe96bf4d873cd2aef971ae4
+  - enabled: 1
+    path: Assets/Scenes/tutorial_general.unity
+    guid: 67edf24ba60e80540bfa4349fcf10752
   - enabled: 1
     path: Assets/Scenes/opening_screen.unity
     guid: 2e3eebfd4c186bb42937253994dcccb6

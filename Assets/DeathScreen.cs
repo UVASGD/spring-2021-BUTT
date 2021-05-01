@@ -19,7 +19,9 @@ public class DeathScreen : MonoBehaviour
     {
         if (Time.time - time > 4)
         {
+            string oldScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("opening_screen");
+            SceneManager.UnloadSceneAsync(oldScene);
         }
     }
 }
