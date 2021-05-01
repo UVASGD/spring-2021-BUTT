@@ -21,11 +21,15 @@ public class Shoot : MonoBehaviour
     public float percentInc = 1F;
     public static float curTelePercent = 100;
     public static float curRecPercent = 100;
+    public static float curRacePercent = 100;
+    public wallAnimator wall_anima;
+    public bool race = false;
     public TextMeshPro diffInd;
     public bool recoilOnly = false;
     float lastLaserFire = -1;
     public LavaWall lavaWall1, lavaWall2;
     public Spawner spawner;
+    public wall_AI wall;
     float lavaWallSpeed;
     float initSpawnRate;
     public bool randTele = false;
@@ -78,6 +82,14 @@ public class Shoot : MonoBehaviour
                     curTelePercent += actionScore * percentInc;
                     diffInd.text = "Rate: " + (int)curTelePercent + "%";
                     spawner.spawnRate = initSpawnRate * curTelePercent / 100F;
+                }
+                if(race)
+                {
+                    float actionScore = (3F - ((float)ar % 4)) / 3F;
+                    actionScore += scaleOverTime;
+                    curRacePercent += actionScore * percentInc;
+                    diffInd.text = "Speed: " + (int)curRacePercent + "%";
+                    wall_anima.speed = curRacePercent / 100F;
                 }
                 if (ar != ActionRating.INVALID)
                 {
