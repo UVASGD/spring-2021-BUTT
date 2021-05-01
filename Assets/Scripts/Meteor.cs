@@ -15,10 +15,8 @@ public class Meteor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<CircleCollider2D>().enabled = false;
         initialPosition = transform.position.y;
         playerInside = null;
-        damage = 10;
     }
 
     // Update is called once per frame
@@ -53,8 +51,10 @@ public class Meteor : MonoBehaviour
     }
 
     // Checks if Player is inside of Meteor and saves it's object in memory
-    void OnTriggerStay2D(Collider2D o)
+    void OnTriggerEnter2D(Collider2D o)
     {
+
+        print("awefjawefoniawefnaewf");
         if(playerInside == null && o.gameObject.name == "Player")
         {
             playerInside = o.gameObject;
@@ -77,6 +77,10 @@ public class Meteor : MonoBehaviour
         GetComponent<SpriteRenderer>().color = black ? new Color(1, 1, 1) : new Color(1, 1, 0);
         black = !black;
 
+        if (beatCount == beatsToDrop - 2)
+        {
+            GetComponent<Animator>().SetTrigger("Penis");
+        }
         if (beatCount == beatsToDrop - 1 )
         {
             // Checks if player is still colliding with Meteor. If so, deal damage to player.
@@ -84,7 +88,6 @@ public class Meteor : MonoBehaviour
             {
                 playerInside.SendMessage("Damage", damage);
             }
-            GetComponent<Animator>().SetTrigger("Penis");
         }
     }
 
