@@ -44,5 +44,13 @@ public class finnsihLine : MonoBehaviour
 
         
     }
-
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        print("AWEfawfa");
+        if (other.gameObject.tag == "Player")
+        {
+            ScoreManager.score += 100;
+        }
+    }
 }

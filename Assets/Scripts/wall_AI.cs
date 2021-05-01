@@ -12,18 +12,24 @@ public class wall_AI : MonoBehaviour
     private Vector3 currentPlayerX;
     private float checkpoint = 20f;
     public List<GameObject> goals = new List<GameObject>();
+    public static float curRacePercemt = 100;
+    public bool race = false;
+    public float speed = 1.1f;
+    private Animator animator;
 
     List<GameObject> spawnedWalls = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-
+      //  animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         currentPlayerX = player.transform.position;
+
+        //animator.SetFloat("speed", speed);
 
         //if (player.transform.position.x > checkpoint)
         //{

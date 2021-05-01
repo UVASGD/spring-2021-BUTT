@@ -1032,6 +1032,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
+--- !u!114 &2040134485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 870533222774347988, guid: 90e98721c7b4a104b9b80a1859af0ef9, type: 3}
+  m_PrefabInstance: {fileID: 2040134484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489059594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6ec5880879d214da46e05c2568d4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3331068359429256119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1185,12 +1196,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 362319630}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 2040134485}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: notLaser
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: fourQuads
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: percentInc
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: bulletSpeed
