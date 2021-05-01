@@ -23,6 +23,7 @@ public class finnsihLine : MonoBehaviour
         {
             moveAway();
         }
+        
     }
 
     void moveAway()
@@ -43,6 +44,14 @@ public class finnsihLine : MonoBehaviour
         forceToApply = forceToApply * forceAmount;
 
         
+    }
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Player")
+        {
+            //player.SendMessage("Damage", damage);
+            Destroy(this.gameObject);
+        }
     }
 
 }

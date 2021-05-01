@@ -403,9 +403,17 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: race
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: notLaser
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: wall_anima
+      value: 
+      objectReference: {fileID: 2114009251}
     - target: {fileID: 6443348360421146199, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: recoilForce
       value: 700
@@ -1655,7 +1663,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1686842676338113277, guid: b5bccd5b4440b544d9a5b59d988a57ff, type: 3}
       propertyPath: m_LinearDrag
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -1686842676338113277, guid: b5bccd5b4440b544d9a5b59d988a57ff, type: 3}
       propertyPath: m_GravityScale
