@@ -21,6 +21,18 @@ EditorBuildSettings:
     path: Assets/Scenes/TeleportOnly.unity
     guid: 33d2197c7e245344881f4fdb27ad77ca
   - enabled: 1
+    path: Assets/Scenes/tutorial_rock.unity
+    guid: 75b465e98c4c2034d8f1fd3ea1e9fdbd
+  - enabled: 1
+    path: Assets/Scenes/tutorial_jump.unity
+    guid: e4baa90c3ff27c04ba46ad19a3073296
+  - enabled: 1
+    path: Assets/Scenes/tutorial_quad.unity
+    guid: d0ca2ee7bef3ddd47912c125502d0db9
+  - enabled: 1
+    path: Assets/Scenes/tutorial_airball.unity
+    guid: 36ab0e2b6635d73409e2f8c54534a5c2
+  - enabled: 1
     path: Assets/Scenes/FourQuadsCopy.unity
     guid: e8f7705afe4cee943a3e29d5be8fac02
   - enabled: 1

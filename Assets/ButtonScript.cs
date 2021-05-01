@@ -14,7 +14,7 @@ public class ButtonScript : MonoBehaviour
     { 
         { "RecoilOnly", "tutorial_rock" },
         { "TeleportOnly", "tutorial_jump" }, 
-        { "FourQuads", "tutorial_quad" },
+        { "FourQuadsCopy", "tutorial_quad" },
         { "Hackeysack", "tutorial_airball" }
     };
     public string firstLevelScene;
