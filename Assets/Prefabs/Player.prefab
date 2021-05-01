@@ -106,7 +106,7 @@ MonoBehaviour:
   musicManager: {fileID: 5608018317522813373, guid: ae38f695a1bc3f8428af3866a6fabec3, type: 3}
   disableMovement: 0
   fourQuads: 0
-  teleEnabled: 1
+  teleEnabled: 0
 --- !u!50 &6443348360421146193
 Rigidbody2D:
   serializedVersion: 4

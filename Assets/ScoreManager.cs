@@ -45,8 +45,12 @@ public class ScoreManager : MonoBehaviour
                 {
                     reshuffle(scenes);
                 }
-                print("Awefawefjoawenfnawefnawenfnaewnfnaewfbawefhaewuifaeiwfjoijaewfoijaweofiawhfea;hewfuiahewfiuhawehluawleiuhflaiuwhefliaubewfbawfebwefuhwefiuewfwefbefbwebfbwefbwbefbwefb");
-                SceneManager.LoadScene(curScene);
+                string sceneToGo = curScene;
+                if (!SceneManager.GetActiveScene().name.Contains("tutorial") && ButtonScript.tutorial)
+                {
+                    sceneToGo = ButtonScript.tutorialNames[sceneToGo];
+                }
+                SceneManager.LoadScene(sceneToGo);
                 SceneManager.UnloadSceneAsync(oldScene);
             }
         }

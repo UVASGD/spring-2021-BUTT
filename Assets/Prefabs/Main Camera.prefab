@@ -390,7 +390,7 @@ MonoBehaviour:
   beatTimes: []
   scoreManager: {fileID: 6083321067758957716}
   perfectScoreInc: 0.2
-  beatLTime: 0.4
+  beatLTime: 0.06
 --- !u!212 &6083321067594884051
 SpriteRenderer:
   m_ObjectHideFlags: 0
