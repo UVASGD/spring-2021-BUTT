@@ -1309,7 +1309,6 @@ Transform:
   - {fileID: 2147440870}
   - {fileID: 2050588746}
   - {fileID: 794894100}
-  - {fileID: 665691219}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1966,12 +1965,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665691218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.56, y: -1.51, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 5.6, y: -3.02, z: 10}
+  m_LocalScale: {x: 2.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1506816632}
-  m_Father: {fileID: 360688509}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &665691220
 MonoBehaviour:
@@ -4042,7 +4041,7 @@ MonoBehaviour:
   beatsToSwitch: 8
   container1: {fileID: 360688508}
   container2: {fileID: 479620379}
-  firstLevelScene: tutorial_general
+  firstLevelScene: FourQuadsCopy
   timeInd: {fileID: 167856687}
   loadFirstLevel: 1
   beatCounter: 1
