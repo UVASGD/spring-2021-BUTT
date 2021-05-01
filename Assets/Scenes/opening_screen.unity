@@ -3425,6 +3425,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2078303053369835432, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
+      propertyPath: healthDegen
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6443348360421146192, guid: f60a2e3c2fcb6804295138139d767619, type: 3}
       propertyPath: musicManager
       value: 

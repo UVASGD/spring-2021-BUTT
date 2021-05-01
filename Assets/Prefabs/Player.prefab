@@ -196,7 +196,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   healthRegen: 0
-  healthDegen: 1
+  healthDegen: 0
   regen: 0.01
   degen: 0.1
 --- !u!120 &6443348360421146221

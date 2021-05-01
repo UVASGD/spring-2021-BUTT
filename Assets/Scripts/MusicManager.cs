@@ -27,11 +27,11 @@ public class MusicManager : MonoBehaviour
     public ScoreManager scoreManager;
     public float perfectScoreInc = .2F;
     static int beats = 0;
-    bool start = false;
+    //bool start = false;
     int beatStart = -1;
     private void Start()
     {
-        start = true;
+        //start = true;
         beatStart = beats;
         source = GameObject.Find("SoundPlayer").GetComponent<AudioSource>();
         beatTimes = new List<float>();
